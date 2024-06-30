@@ -1,0 +1,9 @@
+@import url('../../utils/variables.css');
+
+
+.header {
+display: flex;
+justify-content: space-between;
+border-bottom: var(--border-radius-2xs) solid var(--gray-color);
+padding:var(--gap-m) var(--gap-10xl);
+}

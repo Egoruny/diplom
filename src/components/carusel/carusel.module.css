@@ -1,0 +1,35 @@
+.container {
+    position: relative;
+    height: 150px;
+    width: 450px;
+}
+
+.window {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+.all_items_container {
+    height: 100%;
+    display: flex;
+
+    transition: translateX;
+    transition-property: transform;
+    transition-duration: 700ms;
+    transition-timing-function: ease-in-out;
+}
+
+.right,.left {
+    position: absolute;
+    top: 50%;
+    z-index: 4;
+}
+
+.right {
+    right: 0;
+}
+
+.left {
+    left: 0;
+}

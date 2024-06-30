@@ -1,0 +1,14 @@
+@import url('../../utils/variables.css');
+
+.main_container {
+    width: var(--full-size);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-3xl);
+}
+
+.row_container {
+    display: flex;
+    justify-content: space-between;
+    width:var(--full-size);
+}

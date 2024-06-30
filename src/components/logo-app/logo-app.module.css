@@ -1,0 +1,11 @@
+@import url('../../utils/variables.css');
+
+
+.logo   {
+color: linear-gradient(333deg, rgba(38,13,193,1) 34%, rgba(150,16,184,1) 100%);
+letter-spacing: var(--gap-3xs);
+}
+
+a:active {
+    color: inherit; 
+  }

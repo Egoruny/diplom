@@ -1,0 +1,11 @@
+@import url('../../utils/variables.css');
+.wrapper {
+    max-width: var(--app-max-width);
+    margin: 0 auto;
+}
+
+
+.page_wrapper {
+    padding: var(--gap-m) var(--gap-10xl);
+    width: var(--full-size);
+}
