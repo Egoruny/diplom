@@ -1,6 +1,7 @@
 import { Carusel } from "../../components/carusel/carusel";
 import { CatalogItem } from "../../components/catalog-item/catalog-item";
 import { WrapComponent } from "../../components/wrap-component/wrap-component";
+import { ProductCard } from "../../components/product-card/product-card";
 import phone from "../../assets/Mask-group.svg";
 import { titles } from "../../utils/constans/titles";
 
@@ -38,9 +39,49 @@ const catalogData = [
 ];
 
 
+const discountData = [
+	{
+		phoneDiscription:"Смартфон Apple Iphobne14 128GB",
+		price:Math.floor(Math.random() * (3000 - 2500 + 1)) + 2500,
+		discount:Math.floor(Math.random() * 21),
+		isAvalible:false,
+		imageSrc:"https://xistore.by/upload/resize/element/142137/bcf/ad30c91c898dcf8e3ba32e9af58959aa_482_482_80.jpg",
+	},
+	{
+		phoneDiscription:"Смартфон Apple Iphobne14 128GB",
+		price:Math.floor(Math.random() * (3000 - 2500 + 1)) + 2500,
+		discount:Math.floor(Math.random() * 21),
+		isAvalible:true,
+		imageSrc:"https://xistore.by/upload/resize/element/142137/bcf/ad30c91c898dcf8e3ba32e9af58959aa_482_482_80.jpg",
+	},
+	{
+		phoneDiscription:"Смартфон Apple Iphobne14 128GB",
+		price:Math.floor(Math.random() * (3000 - 2500 + 1)) + 2500,
+		discount:Math.floor(Math.random() * 21),
+		isAvalible:false,
+		imageSrc:"https://xistore.by/upload/resize/element/142137/bcf/ad30c91c898dcf8e3ba32e9af58959aa_482_482_80.jpg",
+	},
+	{
+		phoneDiscription:"Смартфон Apple Iphobne14 128GB",
+		price:Math.floor(Math.random() * (3000 - 2500 + 1)) + 2500,
+		discount:Math.floor(Math.random() * 21),
+		isAvalible:true,
+		imageSrc:"https://xistore.by/upload/resize/element/142137/bcf/ad30c91c898dcf8e3ba32e9af58959aa_482_482_80.jpg",
+	},
+	{
+		phoneDiscription:"Смартфон Apple Iphobne14 128GB",
+		price:Math.floor(Math.random() * (3000 - 2500 + 1)) + 2500,
+		discount:Math.floor(Math.random() * 21),
+		isAvalible:true,
+		imageSrc:"https://xistore.by/upload/resize/element/142137/bcf/ad30c91c898dcf8e3ba32e9af58959aa_482_482_80.jpg",
+	},
+]
+
+
 
 
 export const MainPage = () => {
+
 	return (
 		<main>
 			<Carusel>
@@ -49,10 +90,14 @@ export const MainPage = () => {
 				<div className={styles.item3}>item3</div>
 			</Carusel>
 			<WrapComponent text={titles.catalogTitle}>
-				{catalogData.map(item => (
-					<CatalogItem {...item} />
+				{catalogData.map((item ,index)=> (
+					<CatalogItem {...item} key={index} />
 				))}
 			</WrapComponent>
+			<WrapComponent text={titles.stockTitle} bordered>
+				{discountData.map((item,index) =><ProductCard {...item} key={index}/>)}
+			</WrapComponent>
+
 		</main>
 	);
 };

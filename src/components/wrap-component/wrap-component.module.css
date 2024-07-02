@@ -12,3 +12,9 @@
     justify-content: space-between;
     width:var(--full-size);
 }
+
+.border {
+    padding: var(--gap-2s);
+    border-top:var(--border-radius-2xs) solid var(--gray-color) ;
+    border-bottom: var(--border-radius-2xs) solid var(--gray-color);
+}

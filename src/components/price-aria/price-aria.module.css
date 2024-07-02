@@ -1,0 +1,12 @@
+@import url('../../utils/variables.css');
+.container {
+    display: flex;
+    align-items: center;
+    gap:var( --gap-2s) ;
+}
+
+.container > p {
+    font-size: var(--font-size-xs);
+    text-decoration: line-through;
+    color:  var(--gray-color);
+}

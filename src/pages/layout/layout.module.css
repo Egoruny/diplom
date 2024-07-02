@@ -2,10 +2,12 @@
 .wrapper {
     max-width: var(--app-max-width);
     margin: 0 auto;
+    min-height: 100vh;
 }
 
 
 .page_wrapper {
     padding: var(--gap-m) var(--gap-10xl);
     width: var(--full-size);
+    height: 100%;
 }

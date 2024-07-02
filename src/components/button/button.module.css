@@ -1,0 +1,24 @@
+@import url('../../utils/variables.css');
+
+.blue,.primary {
+    border: none;
+    cursor: pointer;
+    border-radius: var(--border-radius-m);
+
+}
+
+
+.primary {
+    background-color: var(--prymari-color);
+    color:var(--white-color);
+}
+
+.blue {
+    color:var(--black-color);
+    background: var(--blue-color);
+}
+
+
+.middle {
+    padding: var(--gap-2s) var(--gap-l);
+}

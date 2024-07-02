@@ -1,0 +1,20 @@
+@import url('../../utils/variables.css');
+
+.card_container {
+    width: 216px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-m);
+}
+
+
+
+.is_avalible {
+    color:var(--green-color);
+    font-size: var(--font-size-s);
+}
+
+.is_not_avalible {
+    color:var(--red-color);
+    font-size: var(--font-size-s);
+}
