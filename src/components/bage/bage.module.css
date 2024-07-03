@@ -1,0 +1,10 @@
+@import url('../../utils/variables.css');
+
+
+
+.bage_container {
+    position: absolute;
+    padding: var(--gap-2s);
+    background-color: var(--orange-color);
+    border-radius: var(--border-radius-m);
+}

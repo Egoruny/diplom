@@ -1,6 +1,6 @@
 @import url('../../utils/variables.css');
 
-.blue,.primary {
+.blue,.primary,.defult {
     border: none;
     cursor: pointer;
     border-radius: var(--border-radius-m);
@@ -18,7 +18,20 @@
     background: var(--blue-color);
 }
 
+.defult {
+    background:none;
+}
+
+
+.small {
+padding: var(--gap-2xs) var(--gap-2s);
+}
+
 
 .middle {
-    padding: var(--gap-2s) var(--gap-l);
+    padding: var(--gap-2s) var(--gap-m);
+}
+
+.large {
+    padding: var(--gap-2s) var(--gap-xl);
 }

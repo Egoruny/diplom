@@ -1,6 +1,7 @@
 @import url('../../utils/variables.css');
 
 .card_container {
+    position: relative;
     width: 216px;
     display: flex;
     flex-direction: column;

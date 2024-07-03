@@ -1,4 +1,4 @@
-import { useState, useEffect, Children, cloneElement, ReactNode } from "react";
+import { useState, useEffect, Children, cloneElement } from "react";
 import styles from "./carusel.module.css";
 
 const oneHundredPercent = "100%";
@@ -6,6 +6,8 @@ const oneHundredPercent = "100%";
 const childWidth = 450;
 
 const interval = 5000;
+
+type ItervalType = number | undefined
 
 export const Carusel = ({ children }) => {
 	const [childrenState, setChildrenState] = useState([]);
@@ -50,7 +52,7 @@ export const Carusel = ({ children }) => {
 	}, [children]);
 
 	useEffect(() => {
-		let intervalId: number | undefined;
+		let intervalId:ItervalType;
 		if (childrenState.length && !shoodShowBtn) {
 			intervalId = setInterval(onClickRightBtn, interval);
 		} else {

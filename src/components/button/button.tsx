@@ -4,8 +4,8 @@ import { ReactNode } from "react";
 
 type ButtonProps = {
 	children: ReactNode;
-	type?: "primary" | "blue";
-	size?: "middle" | "large";
+	type?: "primary" | "blue" | "defult";
+	size?: "middle" | "large" | "small";
 };
 
 export const Button = ({
@@ -14,17 +14,14 @@ export const Button = ({
 	size = "middle",
 }: ButtonProps) => {
 
-	const isCorrectBtnType = type === "primary" || type === "blue";
-	const isCorrectBtnSize = size === "middle";
+	const isCorrectBtnType = type === "primary" || type === "blue" || type === "defult";
+	const isCorrectBtnSize = size === "middle" || size === "small" || size === "large";
 
 	return (
 		<button
 			className={cn(
 				styles[`${isCorrectBtnType ? type : "primary"}`],
 				styles[`${isCorrectBtnSize ?size:"middle"}`],
-				{
-					[styles.test]: false,
-				}
 			)}
 		>
 			{children}
