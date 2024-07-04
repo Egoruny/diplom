@@ -9,5 +9,19 @@
 .page_wrapper {
     padding: var(--gap-m) var(--gap-10xl);
     width: var(--full-size);
-    height: 100%;
+    min-height: 100%;
+}
+
+
+@media(max-width:840px) {
+    .page_wrapper {
+        padding:var(--gap-m) var(--gap-6xl);
+    }
+}
+
+
+@media(max-width:480px) {
+    .page_wrapper {
+        padding:var(--gap-m) var(--gap-2s);
+    }
 }

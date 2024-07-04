@@ -3,7 +3,7 @@ import styles from "./carusel.module.css";
 
 const oneHundredPercent = "100%";
 
-const childWidth = 450;
+const childWidth = 100;
 
 const interval = 5000;
 
@@ -39,15 +39,15 @@ export const Carusel = ({ children }) => {
 
 	useEffect(() => {
 		setChildrenState(
-			Children.map(children, child =>
+			Children.map(children, child =>(
 				cloneElement(child, {
 					style: {
 						height: oneHundredPercent,
-						minWidth: childWidth,
-						maxWidth: childWidth,
+						minWidth: oneHundredPercent,
+						maxWidth: oneHundredPercent,
 					},
 				})
-			)
+			))
 		);
 	}, [children]);
 
@@ -75,7 +75,7 @@ export const Carusel = ({ children }) => {
 				<div
 					className={styles.all_items_container}
 					style={{
-						transform: `translateX(${offset}px)`,
+						transform: `translateX(${offset}%)`,
 					}}
 				>
 					{childrenState}

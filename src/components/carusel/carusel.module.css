@@ -1,29 +1,31 @@
+@import url('../../utils/variables.css');
 .container {
     position: relative;
-    height: 150px;
-    width: 450px;
+    height: var(--wrap-container-heigth);
+    width:var(--full-size);
 }
 
 .window {
     overflow: hidden;
-    height: 100%;
-    width: 100%;
+    height:var(--full-size);
+    width:var(--full-size);
+
 }
 
 .all_items_container {
-    height: 100%;
+    height:var(--full-size);
     display: flex;
 
     transition: translateX;
     transition-property: transform;
-    transition-duration: 700ms;
+    transition-duration: 1200ms;
     transition-timing-function: ease-in-out;
 }
 
 .right,.left {
     position: absolute;
-    top: 50%;
-    z-index: 4;
+    top:var(--half-size);
+    z-index: var(--btn-z-index);
 }
 
 .right {

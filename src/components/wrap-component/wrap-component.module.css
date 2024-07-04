@@ -11,10 +11,23 @@
     display: flex;
     justify-content: space-between;
     width:var(--full-size);
+    gap: 10px;
 }
 
 .border {
     padding: var(--gap-2s);
     border-top:var(--border-radius-2xs) solid var(--gray-color) ;
     border-bottom: var(--border-radius-2xs) solid var(--gray-color);
+}
+
+
+@media(max-width:1100px) {
+    .row_container {
+        overflow-y: hidden;
+        overflow-x: scroll;
+    }
+
+h2 {
+    font-size: 16px;
+}
 }

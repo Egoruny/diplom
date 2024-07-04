@@ -27,8 +27,8 @@ export const ProductCard = ({
 }: ProductCardProps) => {
 	return (
 		<div className={styles.card_container}>
-			<figure>
-				<img src={imageSrc} width={200} height={200} />
+			<figure className={styles.img_container}>
+				<img src={imageSrc} width={200} height={200} className={styles.card_img} />
 			</figure>
 			<h4>{phoneDiscription}</h4>
 			<PriceAria price={price} discount={discount} />

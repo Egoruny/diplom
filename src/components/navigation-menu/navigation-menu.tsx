@@ -5,30 +5,24 @@ import styles from "./navigation-menu.module.css";
 
 const imageSize = 20;
 
+const navMenuData = [basketIcon, profileIcon];
+
 export const NavigationMenu = () => {
 	return (
 		<nav>
 			<ul className={styles.btn_groupe}>
-				<li>
-					<Button type="defult" size="small">
-						<img
-							src={basketIcon}
-							alt="bascet"
-							width={imageSize}
-							height={imageSize}
-						/>
-					</Button>
-				</li>
-				<li>
-					<Button type="defult" size="small">
-						<img
-							src={profileIcon}
-							alt="profile"
-							width={imageSize}
-							height={imageSize}
-						/>
-					</Button>
-				</li>
+				{navMenuData.map(item => (
+					<li>
+						<Button type="defult" size="small">
+							<img
+								src={item}
+								alt="bascet"
+								width={imageSize}
+								height={imageSize}
+							/>
+						</Button>
+					</li>
+				))}
 			</ul>
 		</nav>
 	);

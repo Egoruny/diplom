@@ -7,3 +7,20 @@ justify-content: space-between;
 border-bottom: var(--border-radius-2xs) solid var(--gray-color);
 padding:var(--gap-m) var(--gap-10xl);
 }
+
+
+@media (max-width:840px) {
+    .header {
+        padding:var(--gap-m) var(--gap-6xl);
+    }
+}
+
+
+@media (max-width:480px ) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+        padding:var(--gap-m) var(--gap-2s);
+        gap: var(--gap-2s);
+    }
+}

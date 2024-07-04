@@ -33,5 +33,10 @@
     --font-size-xs: 12px;
     --font-size-s: 14px;
     
-    --full-size:100%
+    --full-size:100%;
+    --half-size:50%;
+
+    --btn-z-index:4;
+
+    --wrap-container-heigth:200px;
 }

@@ -1,21 +1,36 @@
-@import url('../../utils/variables.css');
+@import url("../../utils/variables.css");
 
 .card_container {
-    position: relative;
-    width: 216px;
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-m);
+	position: relative;
+	max-width: 216px;
+	display: flex;
+	flex-direction: column;
+	gap: var(--gap-m);
 }
 
-
-
 .is_avalible {
-    color:var(--green-color);
-    font-size: var(--font-size-s);
+	color: var(--green-color);
+	font-size: var(--font-size-s);
 }
 
 .is_not_avalible {
-    color:var(--red-color);
-    font-size: var(--font-size-s);
+	color: var(--red-color);
+	font-size: var(--font-size-s);
+}
+
+.img_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+
+@media (max-width:840px) {
+    .card_container {
+        max-width:150px ;
+    }
+
+    .card_img {
+        max-width: 150px;
+    }
 }

@@ -2,7 +2,8 @@
 .container {
     display: flex;
     align-items: center;
-    gap:var( --gap-2s) ;
+    flex-wrap: wrap;
+    gap:var( --gap-2s);
 }
 
 .container > p {

@@ -1,7 +1,8 @@
 @import url('../../utils/variables.css');
 
 .input_field {
-width: 800px;
+max-width: 800px;
+width: 100%;
 position: relative;
 }
 
@@ -38,4 +39,8 @@ position: relative;
 }
 
 
-
+@media (max-width:480px) {
+  .input_field {
+    max-width:100%;
+  }
+}
