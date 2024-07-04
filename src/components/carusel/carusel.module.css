@@ -3,13 +3,14 @@
     position: relative;
     height: var(--wrap-container-heigth);
     width:var(--full-size);
+    
 }
 
 .window {
     overflow: hidden;
     height:var(--full-size);
     width:var(--full-size);
-
+    border-radius:var(--border-radius-2s);
 }
 
 .all_items_container {
