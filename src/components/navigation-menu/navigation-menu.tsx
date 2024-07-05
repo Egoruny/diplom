@@ -11,8 +11,8 @@ export const NavigationMenu = () => {
 	return (
 		<nav>
 			<ul className={styles.btn_groupe}>
-				{navMenuData.map(item => (
-					<li>
+				{navMenuData.map((item,index) => (
+					<li key={index}>
 						<Button type="defult" size="small">
 							<img
 								src={item}

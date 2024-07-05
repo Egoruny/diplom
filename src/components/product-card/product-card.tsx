@@ -2,6 +2,7 @@ import { PriceAria } from "../../components/price-aria/price-aria";
 import { Button } from "../../components/button/button";
 import { Bage } from "../../components/bage/bage";
 
+
 import { titles } from "../../utils/constans/titles";
 
 import styles from "./product-card.module.css";
@@ -10,27 +11,33 @@ const available = "в наличии";
 
 const notAvailable = "нет в наличии";
 
+const imageSize = 200;
+
 type ProductCardProps = {
-	phoneDiscription: string;
+	productDiscription: string;
 	price: number;
 	discount?: number;
 	isAvalible: boolean;
 	imageSrc: string;
+	onClickCard:(arg:any) => void
 };
 
 export const ProductCard = ({
-	phoneDiscription,
+	productDiscription,
 	price,
 	discount,
 	isAvalible,
 	imageSrc,
+	onClickCard
 }: ProductCardProps) => {
+
+
 	return (
-		<div className={styles.card_container}>
+		<div className={styles.card_container} onClick={() => onClickCard({price,productDiscription,imageSrc})}>
 			<figure className={styles.img_container}>
-				<img src={imageSrc} width={200} height={200} className={styles.card_img} />
+				<img src={imageSrc} width={imageSize} height={imageSize} className={styles.card_img} />
 			</figure>
-			<h4>{phoneDiscription}</h4>
+			<h4>{productDiscription}</h4>
 			<PriceAria price={price} discount={discount} />
 			<p
 				className={

@@ -1,6 +1,7 @@
 @import url("../../utils/variables.css");
 
 .card_container {
+	cursor: pointer;
 	position: relative;
 	max-width: 216px;
 	display: flex;
