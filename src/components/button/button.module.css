@@ -1,10 +1,12 @@
 @import url('../../utils/variables.css');
 
-.blue,.primary,.defult {
+.blue,.primary,.text {
     border: none;
     cursor: pointer;
     border-radius: var(--border-radius-m);
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
@@ -19,7 +21,17 @@
 }
 
 .defult {
+    cursor: pointer;
+    border: var(--border-radius-2xs) solid var(--gray-color); 
     background:none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text {
+background:none;
+padding: 0;
 }
 
 
@@ -33,5 +45,12 @@ padding: var(--gap-2xs) var(--gap-2s);
 }
 
 .large {
-    padding: var(--gap-2s) var(--gap-xl);
+    padding: var(--gap-m) var(--gap-3xl);
+}
+
+
+.shape {
+    cursor: pointer;
+    border: var(--border-radius-2xs) solid var(--gray-color); 
+    border-radius:var(--full-size);
 }

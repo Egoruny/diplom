@@ -1,0 +1,51 @@
+@import url('../../utils/variables.css');
+
+.product_page_header {
+    display: flex;
+    gap: var(--gap-2s);
+}
+
+.back_btn {
+    border:none;
+}
+
+.product_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.product_characteristics_container {
+    max-width: 350px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.chenge_color_container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-2s);
+}
+
+.characteristics > ul > li {
+margin-top:var(--gap-xl);
+}
+
+.characteristics > ul :not(:first-child) {
+    color:var( --gray-color-rich);
+}
+
+
+.prise_container {
+    width: 280px;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+    gap: var(--gap-2s);
+    border-radius:var(--border-radius-m);
+    background:#E7E7ED;
+}
