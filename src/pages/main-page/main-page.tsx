@@ -100,7 +100,8 @@ export const MainPage = () => {
 	return (
 		<main className={styles.main_page_container}>
 			<Carusel>
-				<div className={styles.item1}>item1</div>
+					<div className={styles.item1}>item1</div>
+			
 				<div className={styles.item2}>item2</div>
 				<div className={styles.item3}>item3</div>
 			</Carusel>
