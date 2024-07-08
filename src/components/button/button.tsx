@@ -22,19 +22,25 @@ export const Button = ({
 	onClick = () => {},
 	icon = "",
 	className,
-	shape = false
+	shape
 }: ButtonProps) => {
+	const isCorrectBtnType =
+		type === "primary" ||
+		type === "blue" ||
+		type === "defult" ||
+		type === "text";
+
+	const isCorrectBtnSize = size === "middle" || size === "small" || size === "large";
 
 	return (
 		<button
 			onClick={e => onClick(e)}
 			className={cn(
 				className,
-				styles[type],
-				styles[size],
-				{
-					[styles.shape]: shape,
-				}
+				styles[`${isCorrectBtnType ? type : "primary"}`],
+				styles[`${isCorrectBtnSize ? size : "middle"}`],
+				styles[`${shape ? styles.shape : null}`],
+				{[styles.shape]:shape}
 			)}
 		>
 			{icon && <img src={icon} width={iconSize} height={iconSize} alt="btn-icon" />}

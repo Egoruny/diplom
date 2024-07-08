@@ -1,10 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type State = {
-	selectedProduct: null;
-};
-
-const initialState: State = {
+const initialState = {
 	selectedProduct: null,
 };
 
@@ -12,7 +8,7 @@ const productSlice = createSlice({
 	name: "productSlice",
 	initialState,
 	reducers: {
-		setSelectedProduct(state: State, action) {
+		setSelectedProduct(state, action) {
 			state.selectedProduct = action.payload;
 		},
 	},

@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./bage.module.css";
 
 type BageProps = {
@@ -9,18 +8,11 @@ type BageProps = {
 	bottom?: number;
 };
 
-export const Bage: React.FC<BageProps> = ({
-	discount,
-	top,
-	left,
-	right,
-	bottom,
-}) => {
+export const Bage = ({ discount, top, left, right, bottom }: BageProps) => {
 	return (
 		<div
 			className={styles.bage_container}
-			// TODO: пересотреть подход к компоненту Badge сделать по аналогии с кнопкой
-			style={{ top, left, right, bottom }}
+			style={{ top: top, left: left, right: right, bottom: bottom }}
 		>
 			{discount}%
 		</div>

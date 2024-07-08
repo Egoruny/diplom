@@ -10,7 +10,6 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"noEmit": true,
-		"noEmitOnError": true,
 		"jsx": "react-jsx",
 		"strict": true,
 		"noUnusedLocals": true,
@@ -19,8 +18,7 @@
 		"allowJs": true,
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["src/*"],
-			// "@public/*": ["./public/*"],
+			"@public/*": ["./public/*"],
 			"@components/*": ["./src/components/*"],
 			"@constants/*": ["./src/constants/*"],
 			"@hooks/*": ["./src/hooks/*"],
