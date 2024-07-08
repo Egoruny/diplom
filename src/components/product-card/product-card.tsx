@@ -46,7 +46,7 @@ export const ProductCard = ({
 			>
 				{isAvalible ? available : notAvailable}
 			</p>
-			<Button>{titles.inBasketTitle}</Button>
+			<Button type="asdas">{titles.inBasketTitle}</Button>
 			<Bage discount={discount} right={0}/>
 		</div>
 	);

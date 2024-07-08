@@ -1,4 +1,4 @@
-import { useState, useEffect, Children, cloneElement } from "react";
+import {createContext, useState, useEffect, Children, cloneElement, useContext, useReducer, useRef } from "react";
 import styles from "./carusel.module.css";
 
 const oneHundredPercent = "100%";
@@ -9,7 +9,10 @@ const interval = 5000;
 
 type ItervalType = number | undefined
 
+const CaruselContext = createContext({});
+
 export const Carusel = ({ children }) => {
+	const [children2, setChildren2] = useState([]);
 	const [childrenState, setChildrenState] = useState([]);
 	const [offset, setOffset] = useState(0);
 	const [shoodShowBtn, setShoodShowBtn] = useState(false);
@@ -51,6 +54,10 @@ export const Carusel = ({ children }) => {
 		);
 	}, [children]);
 
+	const setMyClientWdith = (width, id) => {
+		
+	}
+
 	useEffect(() => {
 		let intervalId:ItervalType;
 		if (childrenState.length && !shoodShowBtn) {
@@ -65,6 +72,7 @@ export const Carusel = ({ children }) => {
 	}, [childrenState,shoodShowBtn]);
 
 	return (
+		<CaruselContext.Provider value={{setMyClientWdith}}>
 		<div className={styles.container} onMouseEnter={enterMouseCarusel} onMouseLeave={leaveMouseCarusel}>
 			{shoodShowBtn && (
 				<button className={styles.right} onClick={onClickRightBtn}>
@@ -87,5 +95,17 @@ export const Carusel = ({ children }) => {
 				</button>
 			)}
 		</div>
+		</CaruselContext.Provider>
 	);
+};
+
+Carusel.Item = ({children}) => {
+	const {setMyClientWidth} = useContext(CaruselContext);
+	const itemRef = useRef(null);
+
+	setMyClientWidth(itemRef.current.clientWidth, id)
+
+	return <div ref={itemRef}>
+		{children}
+	</div>
 };
