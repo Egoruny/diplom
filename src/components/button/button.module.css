@@ -1,4 +1,4 @@
-@import url('../../utils/variables.css');
+@import url('../../variables.css');
 
 .blue,.primary,.text {
     border: none;
@@ -21,8 +21,9 @@
 }
 
 .defult {
+    border:none;
     cursor: pointer;
-    border: var(--border-radius-2xs) solid var(--gray-color); 
+    /* border: var(--border-radius-2xs) solid var(--gray-color);  */
     background:none;
     display: flex;
     align-items: center;

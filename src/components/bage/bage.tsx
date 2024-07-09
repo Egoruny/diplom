@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import styles from "./bage.module.css";
 
 type BageProps = {
@@ -9,13 +9,7 @@ type BageProps = {
 	bottom?: number;
 };
 
-export const Bage: React.FC<BageProps> = ({
-	discount,
-	top,
-	left,
-	right,
-	bottom,
-}) => {
+export const Bage: FC<BageProps> = ({ discount, top, left, right, bottom }) => {
 	return (
 		<div
 			className={styles.bage_container}

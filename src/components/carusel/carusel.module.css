@@ -1,4 +1,4 @@
-@import url('../../utils/variables.css');
+@import url('../../variables.css');
 .container {
     position: relative;
     height: var(--wrap-container-heigth);
@@ -16,7 +16,6 @@
 .all_items_container {
     height:var(--full-size);
     display: flex;
-
     transition: translateX;
     transition-property: transform;
     transition-duration: 1200ms;
@@ -27,6 +26,7 @@
     position: absolute;
     top:var(--half-size);
     z-index: var(--btn-z-index);
+    transform: translateY(-50%);
 }
 
 .right {
@@ -35,4 +35,10 @@
 
 .left {
     left: 0;
+}
+
+.carusel_item {
+    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
 }

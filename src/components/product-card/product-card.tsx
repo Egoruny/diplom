@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { PriceAria } from "../../components/price-aria/price-aria";
 import { Button } from "../../components/button/button";
 import { Bage } from "../../components/bage/bage";
@@ -22,14 +23,14 @@ type ProductCardProps = {
 	onClickCard:(arg:any) => void
 };
 
-export const ProductCard = ({
+export const ProductCard:FC<ProductCardProps> = ({
 	productDiscription,
 	price,
 	discount,
 	isAvalible,
 	imageSrc,
 	onClickCard
-}: ProductCardProps) => {
+}) => {
 
 
 	return (
@@ -46,7 +47,7 @@ export const ProductCard = ({
 			>
 				{isAvalible ? available : notAvailable}
 			</p>
-			<Button type="asdas">{titles.inBasketTitle}</Button>
+			<Button text={titles.inBasketTitle} type="primary"/>
 			<Bage discount={discount} right={0}/>
 		</div>
 	);

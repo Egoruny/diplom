@@ -1,27 +1,24 @@
-@import url('../../utils/variables.css');
+@import url("../../variables.css");
 .wrapper {
-    max-width: var(--app-max-width);
-    margin: 0 auto;
-    min-height: 100vh;
+	max-width: var(--app-max-width);
+	margin: 0 auto;
+	min-height: 100vh;
 }
-
 
 .page_wrapper {
-    padding: var(--gap-m) var(--gap-10xl);
-    width: var(--full-size);
-    min-height: 100%;
+	padding: var(--gap-m) var(--gap-10xl);
+	width: var(--full-size);
+	min-height: 100%;
 }
 
-
-@media(max-width:840px) {
-    .page_wrapper {
-        padding:var(--gap-m) var(--gap-6xl);
-    }
+@media (max-width: 840px) {
+	.page_wrapper {
+		padding: var(--gap-m) var(--gap-6xl);
+	}
 }
 
-
-@media(max-width:480px) {
-    .page_wrapper {
-        padding:var(--gap-m) var(--gap-2s);
-    }
+@media (max-width: 480px) {
+	.page_wrapper {
+		padding: var(--gap-m) var(--gap-2s);
+	}
 }

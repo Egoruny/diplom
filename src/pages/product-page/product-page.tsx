@@ -1,7 +1,8 @@
 import { useAppSelector } from "../../hooks/typed-redux-hooks";
 import { useNavigate } from "react-router-dom";
 import { selectedProductSelect } from "../../redux/slices/product-slice/product-slice-selectors";
-import { Button } from "../../components/button/button";
+import { Button } from "@components/button/button";
+import { titles } from "@utils/constans/titles";
 import backIcon from "../../assets/back.svg";
 import phone from "../../assets/Mask-group.svg";
 
@@ -61,7 +62,7 @@ export const ProductPage = () => {
 
 				<div className={styles.prise_container}>
 					<p>7999999BY</p>
-					<Button size="large">В корзину</Button>
+					<Button size="large" text={titles.inBasketTitle}/>
 				</div>
 			</div>
 		</>

@@ -1,4 +1,5 @@
-import { culckDiscount } from "../../utils/healper/culck-discount";
+import { FC } from "react";
+import { calcDiscount } from "../../utils/discount/calc-discount";
 
 import styles from "./price-aria.module.css";
 
@@ -7,9 +8,9 @@ type PriceAriaProps = {
 	discount?: number;
 };
 
-export const PriceAria = ({ price, discount }: PriceAriaProps) => (
+export const PriceAria:FC<PriceAriaProps> = ({ price, discount }) => (
 	<div className={styles.container}>
-		<h3>{culckDiscount(price, discount)} BYN</h3>
+		<h3>{calcDiscount(price, discount)} BYN</h3>
 		{discount && <p>{price} BYN</p>}
 	</div>
 );

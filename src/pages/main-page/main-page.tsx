@@ -92,18 +92,23 @@ export const MainPage = () => {
 
 	const navigate = useNavigate();
 
-	const showProductPage = (selectedProduct) => {
-		dispatch(setSelectedProduct(selectedProduct))
+	const showProductPage = selectedProduct => {
+		dispatch(setSelectedProduct(selectedProduct));
 		navigate(PATH.ProductPage);
 	};
 
 	return (
 		<main className={styles.main_page_container}>
 			<Carusel>
-					<div className={styles.item1}>item1</div>
-			
+				<Carusel.Item>
+				<div className={styles.item1}>item1</div>
+				</Carusel.Item>
+				<Carusel.Item>
 				<div className={styles.item2}>item2</div>
+				</Carusel.Item>
+				<Carusel.Item>
 				<div className={styles.item3}>item3</div>
+				</Carusel.Item>
 			</Carusel>
 			<WrapComponent text={titles.catalogTitle}>
 				{catalogData.map((item, index) => (

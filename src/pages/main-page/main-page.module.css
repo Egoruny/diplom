@@ -1,10 +1,16 @@
 .item1 {
+    height: 100%;
+    width: 100%;;
     background-color: red;
 }
 .item2 {
+    height: 100%;
+    width: 100%;
     background-color: blue;
 }
 .item3 {
+    height: 100%;
+    width: 100%;
     background-color: green;
 }
 

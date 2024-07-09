@@ -1,4 +1,4 @@
-export const culckDiscount = (price: number, discount?:number) => {
+export const calcDiscount = (price: number, discount?:number) => {
 	if (discount === undefined) return price;
 
 	const discountAmount = (price * discount) / 100;
