@@ -1,6 +1,7 @@
 @import url('../../variables.css');
 
 .main_container {
+    position: relative;
     width: var(--full-size);
     display: flex;
     flex-direction: column;
@@ -21,10 +22,25 @@
 }
 
 
+.right,.left {
+    position: absolute;
+    top:var(--half-size);
+    z-index: var(--btn-z-index);
+    transform: translateY(-50%);
+}
+
+.right {
+    right: 0;
+}
+
+.left {
+    left: 0;
+}
+
+
 @media(max-width:1100px) {
     .row_container {
-        overflow-y: hidden;
-        overflow-x: scroll;
+        overflow: hidden;
     }
 
 h2 {

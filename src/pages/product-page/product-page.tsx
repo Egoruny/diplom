@@ -1,23 +1,41 @@
 import { useAppSelector } from "../../hooks/typed-redux-hooks";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { selectedProductSelect } from "../../redux/slices/product-slice/product-slice-selectors";
-import { Button } from "@components/button/button";
+
 import { titles } from "@utils/constans/titles";
+
+import { PriceAria } from "@components/price-aria/price-aria";
+import { InputButton } from "@components/input-button/input-button.tsx";
+import { Button } from "@components/button/button";
+import { ProductCharacteristics } from "@components/product-characteristics/product-characteristics";
+
+
+import { colors } from "@utils/constans/colors";
+
 import backIcon from "../../assets/back.svg";
-import phone from "../../assets/Mask-group.svg";
 
 import styles from "./product-page.module.css";
 
 export const ProductPage = () => {
 	const selectedProduct = useAppSelector(selectedProductSelect);
+	const [productColor,setProductColor] = useState('черный')
 	const navigate = useNavigate();
+
 	const goBack = () => {
 		navigate(-1);
 	};
 
+	const setColor = (e) => {
+		setProductColor(e.target.value)
+	}
+
+	console.log(selectedProduct);
+
 	return (
 		<>
-			<header className={styles.product_page_header}>
+			<div className={styles.product_page_header}>
 				<Button
 					type="defult"
 					className={styles.back_btn}
@@ -26,43 +44,31 @@ export const ProductPage = () => {
 					onClick={goBack}
 				/>
 				<h2>Карточка товара</h2>
-			</header>
+			</div>
 			<div className={styles.product_container}>
-				<img
-					src="https://xistore.by/upload/resize/element/142137/bcf/ad30c91c898dcf8e3ba32e9af58959aa_482_482_80.jpg"
-					alt="product"
-					width={400}
-					height={600}
-				/>
+				<figure style={{ border: `3px solid ${colors.get(productColor)}`}}>
+					<img
+						src="https://xistore.by/upload/resize/element/142137/bcf/ad30c91c898dcf8e3ba32e9af58959aa_482_482_80.jpg"
+						alt="product"
+						width={400}
+						height={600}
+					/>
+				</figure>
 
 				<div className={styles.product_characteristics_container}>
-					<h1>sdadgafghfhdfghdfghdfhdfg</h1>
+					<h1>{selectedProduct.productDiscription}</h1>
 					<div className={styles.chenge_color_container}>
-						<span>цвет:черный</span>
-						<div className={styles.radio_groupe}>
-							<input type="radio" />
-							<input type="radio" />
-							<input type="radio" />
+						<span>цвет:{productColor}</span>
+						<div className={styles.input_btn_groupe}>
+							{selectedProduct.colors.map(({color}) => <InputButton onClick={setColor} value={color}/>)}
 						</div>
 					</div>
-					<div className={styles.characteristics}>
-						<ul>
-							<li>
-								<h4>Характеристики:</h4>
-							</li>
-							<li>Экран_____________такой то</li>
-							<li>Количество ядер_____________такой то</li>
-							<li>Мощность блока_____________такой то</li>
-							<li>Оперативная память_____________такой то</li>
-							<li>Встроеная память_____________такой то</li>
-							<li>Основная камера память_____________такой то</li>
-						</ul>
-					</div>
+				<ProductCharacteristics characteristicsItems={selectedProduct.characteristics}/>
 				</div>
 
 				<div className={styles.prise_container}>
-					<p>7999999BY</p>
-					<Button size="large" text={titles.inBasketTitle}/>
+					<PriceAria price={selectedProduct.price} discount={selectedProduct.discount} />
+					<Button size="large" text={titles.inBasketTitle} />
 				</div>
 			</div>
 		</>

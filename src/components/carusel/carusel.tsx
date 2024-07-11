@@ -1,46 +1,56 @@
- import React from "react";
-import {
-	createContext,
-	useState,
-	useEffect,
-	Children,
-} from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@components/button/button";
 import rigtBtnIcon from "../../assets/Frame1.svg";
 import leftBtnIcon from "../../assets/Frame2.svg";
 
+import { CaruselItem } from "./carusel-item/carusel-item";
+
+import { CaruselContext } from "./carusel-context";
+
 import styles from "./carusel.module.css";
+import { cpSync } from "fs";
 
 const childWidth = 100;
 
-const interval = 5000;
+const interval = 3000;
 
 const iconSize = 40;
 
 type ItervalType = NodeJS.Timeout | undefined;
 
-const CaruselContext = createContext({});
-
 export const Carusel = ({ children }) => {
-	const [children2, setChildren2] = useState([]);
-	const [childrenState, setChildrenState] = useState([]);
+	const [childrenCounter, setChildrenCounter] = useState(0);
+	const [, setSlideCount] = useState(0);
 	const [offset, setOffset] = useState(0);
 	const [shoodShowBtn, setShoodShowBtn] = useState(false);
 
-	const onClickRightBtn = () => {
-		const maxOffset = -(childWidth * (childrenState.length - 1));
-		console.log(maxOffset)
+
+	const value = {
+		childrenCounter,
+		setChildrenCounter,
+	};
+
+	const rightSlide = () => {
+		const maxOffset = -(childWidth * childrenCounter);
+
 		setOffset(currenOffset => {
-			if (maxOffset === currenOffset) {
-				return 0;
-			}
 			return Math.max(currenOffset - childWidth, maxOffset);
 		});
-	};
-	console.log(offset)
 
-	const onClickLeftBtn = () => {
+		setSlideCount(prev => {
+			if (prev >= (childrenCounter - 1)) {
+				setOffset(0);
+				return 0;
+			}
+
+			return prev + 1;
+		});
+	};
+
+	const leftSlide = () => {
 		setOffset(currenOffset => Math.min(currenOffset + childWidth, 0));
+		setSlideCount(prev => Math.max(prev - 1, 0));
 	};
 
 	const enterMouseCarusel = () => {
@@ -52,36 +62,20 @@ export const Carusel = ({ children }) => {
 	};
 
 	// useEffect(() => {
-	// 	setChildrenState(
-	// 		Children.map(children, child =>
-	// 			cloneElement(child, {
-	// 				style: {
-	// 					height: oneHundredPercent,
-	// 					minWidth: oneHundredPercent,
-	// 					maxWidth: oneHundredPercent,
-	// 				},
-	// 			})
-	// 		)
-	// 	);
-	// }, [children]);
+	// 	let intervalId: ItervalType;
+	// 	if (!shoodShowBtn && childrenCounter) {
+	// 		intervalId = setInterval(rightSlide, interval);
+	// 	} else {
+	// 		clearInterval(intervalId);
+	// 	}
 
-	const setMyClientWdith = (width, id) => {};
-
-	useEffect(() => {
-		let intervalId:ItervalType;
-		if (childrenState.length && !shoodShowBtn) {
-			intervalId = setInterval(onClickRightBtn, interval);
-		} else {
-			clearInterval(intervalId);
-		}
-
-		return () => {
-			clearInterval(intervalId);
-		};
-	}, [childrenState, shoodShowBtn]);
+	// 	return () => {
+	// 		clearInterval(intervalId);
+	// 	};
+	// }, [shoodShowBtn, childrenCounter]);
 
 	return (
-		<CaruselContext.Provider value={{ setMyClientWdith }}>
+		<CaruselContext.Provider value={value}>
 			<div
 				className={styles.container}
 				onMouseEnter={enterMouseCarusel}
@@ -91,7 +85,7 @@ export const Carusel = ({ children }) => {
 					<Button
 						type="defult"
 						icon={rigtBtnIcon}
-						onClick={onClickRightBtn}
+						onClick={rightSlide}
 						className={styles.right}
 						iconSize={iconSize}
 					/>
@@ -110,7 +104,7 @@ export const Carusel = ({ children }) => {
 					<Button
 						type="defult"
 						icon={leftBtnIcon}
-						onClick={onClickLeftBtn}
+						onClick={leftSlide}
 						className={styles.left}
 						iconSize={iconSize}
 					/>
@@ -120,6 +114,4 @@ export const Carusel = ({ children }) => {
 	);
 };
 
-Carusel.Item = ({ children }) => {
-	return <div className={styles.carusel_item}>{children}</div>;
-};
+Carusel.Item = CaruselItem;

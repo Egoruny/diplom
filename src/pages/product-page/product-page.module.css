@@ -1,7 +1,9 @@
 @import url('../../variables.css');
 
+
 .product_page_header {
     display: flex;
+    align-items: center;
     gap: var(--gap-2s);
 }
 
@@ -29,12 +31,11 @@
     gap: var(--gap-2s);
 }
 
-.characteristics > ul > li {
-margin-top:var(--gap-xl);
-}
 
-.characteristics > ul :not(:first-child) {
-    color:var( --gray-color-rich);
+
+.input_btn_groupe {
+    display: flex;
+    gap: 10px;
 }
 
 

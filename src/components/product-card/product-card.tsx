@@ -21,6 +21,8 @@ type ProductCardProps = {
 	isAvalible: boolean;
 	imageSrc: string;
 	onClickCard:(arg:any) => void
+	characteristics:any
+	colors:any
 };
 
 export const ProductCard:FC<ProductCardProps> = ({
@@ -29,12 +31,14 @@ export const ProductCard:FC<ProductCardProps> = ({
 	discount,
 	isAvalible,
 	imageSrc,
+	characteristics,
+	colors,
 	onClickCard
 }) => {
 
 
 	return (
-		<div className={styles.card_container} onClick={() => onClickCard({price,productDiscription,imageSrc})}>
+		<div className={styles.card_container} onClick={() => onClickCard({price,productDiscription,imageSrc,characteristics,colors,discount})}>
 			<figure className={styles.img_container}>
 				<img src={imageSrc} width={imageSize} height={imageSize} className={styles.card_img} />
 			</figure>

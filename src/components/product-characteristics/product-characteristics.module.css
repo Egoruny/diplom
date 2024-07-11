@@ -1,0 +1,10 @@
+@import url('../../variables.css');
+
+
+.characteristics > ul > li {
+    margin-top:var(--gap-xl);
+    }
+    
+    .characteristics > ul :not(:first-child) {
+        color:var( --gray-color-rich);
+    }
