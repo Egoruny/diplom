@@ -7,7 +7,7 @@ type ButtonProps = {
 	text?: string | ReactNode ;
 	type?: "primary" | "blue" | "defult" | "text";
 	size?: "middle" | "large" | "small";
-	onClick?: (e?: SyntheticEvent) => void;
+	onClick?: (e: SyntheticEvent) => void;
 	icon?: string;
 	className?: string;
 	shape?: boolean;

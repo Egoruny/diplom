@@ -41,7 +41,6 @@ export const NavigationMenu = () => {
 						type="defult"
 						icon={profileIcon}
 						size="small"
-						onClick={navigeteMenuClick}
 					/>
 				</li>
 			</ul>
