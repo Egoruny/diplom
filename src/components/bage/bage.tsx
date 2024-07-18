@@ -1,22 +1,22 @@
 import { FC } from "react";
 import styles from "./bage.module.css";
+import { useAppSelector } from "@hooks/typed-redux-hooks";
+import { basketSliceSelect } from "@redux/slices/basket-slice/basket-slice-selectors";
 
 type BageProps = {
 	discount?: number;
-	top?: number;
-	left?: number;
-	right?: number;
-	bottom?: number;
+	type: "basket" | "card";
+	quantityGoodsINBasket?: number;
 };
+// сделать енам 
+// опт
+export const Bage: FC<BageProps> = ({ discount, type = "card" }) => {
 
-export const Bage: FC<BageProps> = ({ discount, top, left, right, bottom }) => {
-	return (
-		<div
-			className={styles.bage_container}
-			// TODO: пересотреть подход к компоненту Badge сделать по аналогии с кнопкой
-			style={{ top, left, right, bottom }}
-		>
-			{discount}%
-		</div>
-	);
+	const quantityGoodsINBasket = useAppSelector(basketSliceSelect)
+
+	if (type === "card") {
+		return <div className={styles.bage_container_card}>{discount}%</div>;
+	} else if (type === "basket" && quantityGoodsINBasket.length) {
+		return <div className={styles.bage_container_basket}>{quantityGoodsINBasket.length <= 9?quantityGoodsINBasket.length:9 + '+'}</div>;
+	}
 };

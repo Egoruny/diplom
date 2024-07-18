@@ -1,0 +1,13 @@
+@import url('../../variables.css');
+
+
+.product_page_header {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    gap: var(--gap-2s);
+}
+
+.back_btn {
+    border:none;
+}

@@ -1,0 +1,32 @@
+
+
+.empty {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.items_container {
+    width: 100%;
+}
+
+
+.delete {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+
+@media(min-width:640px) {
+    .items_container {
+        max-width: 800px;
+    }
+
+    .page_container {
+        display: flex;
+        gap: 10px;
+        justify-content: space-between;
+    }
+}

@@ -1,5 +1,7 @@
 @import url('../../variables.css');
 
+
+
 .blue,.primary,.text {
     border: none;
     cursor: pointer;
@@ -26,8 +28,14 @@
     /* border: var(--border-radius-2xs) solid var(--gray-color);  */
     background:none;
     display: flex;
+    gap: 10px;
     align-items: center;
     justify-content: center;
+}
+
+.disabled {
+    cursor:	not-allowed;
+    background: gray;
 }
 
 .text {

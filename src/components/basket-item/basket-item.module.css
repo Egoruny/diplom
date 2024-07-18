@@ -1,0 +1,44 @@
+@import url('../../variables.css');
+
+
+.container {
+    border-top:var(--border-heigth-4xs) solid var(--gray-color);
+    padding-top: 10px;
+}
+
+.top_panel {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.discription {
+    max-width: 150px;
+    word-wrap: break-word;
+}
+
+.discription > p {
+    margin-bottom: 20px;
+}
+
+.picture {
+    max-width: 150px;
+    max-height: 150px;
+}
+
+.picture > img {
+    width: 100%;
+    height: 100%;
+}
+
+.bottom_panel {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+@media (min-width:640px) {
+    .container {
+        border:none;
+    }
+}

@@ -1,5 +1,9 @@
-
+@import url('../../variables.css');
 .btn_groupe {
     display: flex;
-    gap: 10px;
+    gap: var(--gap-2s);
+}
+
+.bage_container {
+    position: relative;
 }

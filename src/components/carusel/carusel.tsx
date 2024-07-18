@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { useState, useEffect } from "react";
 import { Button } from "@components/button/button";
 import rigtBtnIcon from "../../assets/Frame1.svg";
@@ -9,7 +9,6 @@ import { CaruselItem } from "./carusel-item/carusel-item";
 import { CaruselContext } from "./carusel-context";
 
 import styles from "./carusel.module.css";
-import { cpSync } from "fs";
 
 const childWidth = 100;
 
@@ -19,12 +18,15 @@ const iconSize = 40;
 
 type ItervalType = NodeJS.Timeout | undefined;
 
-export const Carusel = ({ children }) => {
+type MyComponentProps = {
+	children: JSX.Element[];
+};
+
+export const Carusel:FC<MyComponentProps> = ({ children }) => {
 	const [childrenCounter, setChildrenCounter] = useState(0);
 	const [, setSlideCount] = useState(0);
 	const [offset, setOffset] = useState(0);
 	const [shoodShowBtn, setShoodShowBtn] = useState(false);
-
 
 	const value = {
 		childrenCounter,
@@ -39,7 +41,7 @@ export const Carusel = ({ children }) => {
 		});
 
 		setSlideCount(prev => {
-			if (prev >= (childrenCounter - 1)) {
+			if (prev >= childrenCounter - 1) {
 				setOffset(0);
 				return 0;
 			}
@@ -61,18 +63,18 @@ export const Carusel = ({ children }) => {
 		setShoodShowBtn(false);
 	};
 
-	// useEffect(() => {
-	// 	let intervalId: ItervalType;
-	// 	if (!shoodShowBtn && childrenCounter) {
-	// 		intervalId = setInterval(rightSlide, interval);
-	// 	} else {
-	// 		clearInterval(intervalId);
-	// 	}
+	useEffect(() => {
+		let intervalId: ItervalType;
+		if (!shoodShowBtn && childrenCounter) {
+			intervalId = setInterval(rightSlide, interval);
+		} else {
+			clearInterval(intervalId);
+		}
 
-	// 	return () => {
-	// 		clearInterval(intervalId);
-	// 	};
-	// }, [shoodShowBtn, childrenCounter]);
+		return () => {
+			clearInterval(intervalId);
+		};
+	}, [shoodShowBtn, childrenCounter]);
 
 	return (
 		<CaruselContext.Provider value={value}>

@@ -1,7 +1,20 @@
 import { FC } from "react";
+import { SyntheticEvent } from "react";
 import { PriceAria } from "../../components/price-aria/price-aria";
 import { Button } from "../../components/button/button";
 import { Bage } from "../../components/bage/bage";
+
+import { useAddProduct } from "@hooks/add-product";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../hooks/typed-redux-hooks";
+
+import { PATH } from "../../utils/constans/path";
+
+import { setSelectedProduct } from "../../redux/slices/product-slice/product-slice";
+
+
+import { SelectedProductType } from "@types/selected-product-type";
+import { BasketItemType } from "@types/basket-item-type";
 
 
 import { titles } from "../../utils/constans/titles";
@@ -14,18 +27,22 @@ const notAvailable = "нет в наличии";
 
 const imageSize = 200;
 
+
 type ProductCardProps = {
+	id: string;
 	productDiscription: string;
 	price: number;
-	discount?: number;
+	discount: number;
 	isAvalible: boolean;
 	imageSrc: string;
-	onClickCard:(arg:any) => void
-	characteristics:any
-	colors:any
+	characteristics: any;
+	colors: any;
+	inBasket: boolean;
+	inBasketCount:number;
 };
 
-export const ProductCard:FC<ProductCardProps> = ({
+export const ProductCard: FC<ProductCardProps> = ({
+	id,
 	productDiscription,
 	price,
 	discount,
@@ -33,14 +50,48 @@ export const ProductCard:FC<ProductCardProps> = ({
 	imageSrc,
 	characteristics,
 	colors,
-	onClickCard
+	inBasket,
+	inBasketCount,
 }) => {
+	const {addProductInBasket} = useAddProduct()
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
+
+	const addProduct = (e:SyntheticEvent, selectedProduct:BasketItemType) => {
+		e.stopPropagation();
+		addProductInBasket(selectedProduct)
+	};
 
 
+
+	const showProductPage = (selectedProduct:SelectedProductType) => {
+		dispatch(setSelectedProduct(selectedProduct));
+		navigate(`${PATH.ProductPage}/${id}`);
+	};
 	return (
-		<div className={styles.card_container} onClick={() => onClickCard({price,productDiscription,imageSrc,characteristics,colors,discount})}>
+		<div
+			className={styles.card_container}
+			onClick={() =>
+				showProductPage({
+					id,
+					price,
+					productDiscription,
+					imageSrc,
+					characteristics,
+					colors,
+					discount,
+					inBasketCount,
+					inBasket
+				})
+			}
+		>
 			<figure className={styles.img_container}>
-				<img src={imageSrc} width={imageSize} height={imageSize} className={styles.card_img} />
+				<img
+					src={imageSrc}
+					width={imageSize}
+					height={imageSize}
+					className={styles.card_img}
+				/>
 			</figure>
 			<h4>{productDiscription}</h4>
 			<PriceAria price={price} discount={discount} />
@@ -51,8 +102,27 @@ export const ProductCard:FC<ProductCardProps> = ({
 			>
 				{isAvalible ? available : notAvailable}
 			</p>
-			<Button text={titles.inBasketTitle} type="primary"/>
-			<Bage discount={discount} right={0}/>
+			<Button
+				text={
+					!inBasket
+						? titles.inBasketTitle
+						: titles.produсtInBasketTitle
+				}
+				type="primary"
+				onClick={e =>
+					addProduct(e,{
+						id,
+						productDiscription,
+						price,
+						discount,
+						imageSrc,
+						inBasketCount,
+					})
+				}
+				disabled={inBasket}
+				className={styles.add_btn}
+			/>
+			{Boolean(discount) && <Bage discount={discount} type="card" />}
 		</div>
 	);
 };

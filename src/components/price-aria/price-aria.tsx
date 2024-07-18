@@ -5,12 +5,22 @@ import styles from "./price-aria.module.css";
 
 type PriceAriaProps = {
 	price: number;
-	discount?: number;
+	discount: number;
 };
 
-export const PriceAria:FC<PriceAriaProps> = ({ price, discount }) => (
+const byn = "BYN";
+
+export const PriceAria: FC<PriceAriaProps> = ({ price, discount }) => (
 	<div className={styles.container}>
-		<h3>{calcDiscount(price, discount)} BYN</h3>
-		{discount && <p>{price} BYN</p>}
+		<h3>
+			{calcDiscount(price, discount)}
+			{byn}
+		</h3>
+		{Boolean(discount) && (
+			<p>
+				{price}
+				{byn}
+			</p>
+		)}
 	</div>
 );

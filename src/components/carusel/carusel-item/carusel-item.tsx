@@ -1,16 +1,18 @@
-import React from "react";
-import {
-	useEffect,
-	useContext,
-} from "react";
+import { FC } from "react";
+import { useEffect, useContext } from "react";
 
 import { CaruselContext } from "../carusel-context";
 
-import styles from './carusel-item.module.css'
+import styles from "./carusel-item.module.css";
+
+type CaruselItemProps = {
+	children: JSX.Element;
+};
 
 
-export const CaruselItem = ({children}) => {
-	const {setChildrenCounter } = useContext(CaruselContext);
+
+export const CaruselItem:FC<CaruselItemProps> = ({ children }) => {
+	const { setChildrenCounter } = useContext(CaruselContext);
 
 	useEffect(() => {
 		setChildrenCounter(curr => curr + 1);

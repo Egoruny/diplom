@@ -1,4 +1,4 @@
-export const colors = new Map([
+export const colors1 = new Map([
     ['красный','red'],
     ['черный','black'],
     ['белый','white'],

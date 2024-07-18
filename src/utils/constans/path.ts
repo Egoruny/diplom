@@ -1,4 +1,5 @@
 export const PATH = {
 Root:'/',
-ProductPage:'/product-page'
+ProductPage:'/product-page',
+BasketPage:'/basket-page'
 }

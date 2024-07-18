@@ -1,10 +1,22 @@
-@import url('../../variables.css');
+@import url("../../variables.css");
 
+.bage_container_card,
+.bage_container_basket {
+	right: 0;
+}
 
+.bage_container_card {
+	position: absolute;
+	padding: var(--gap-2s);
+	background-color: var(--orange-color);
+	border-radius: var(--border-radius-m);
+}
 
-.bage_container {
-    position: absolute;
-    padding: var(--gap-2s);
-    background-color: var(--orange-color);
-    border-radius: var(--border-radius-m);
+.bage_container_basket {
+	position: absolute;
+	border-radius: var(--full-size);
+	background-color: var(--purpure-color);
+	padding: var(--gap-4xs) var( --gap-5s);
+	color: var(--white-color);
+    font-size: var(--font-size-xs);
 }

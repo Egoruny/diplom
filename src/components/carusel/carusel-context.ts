@@ -1,3 +1,3 @@
 import React from "react";
 
-export const CaruselContext = React.createContext();
+export const CaruselContext = React.createContext(undefined);

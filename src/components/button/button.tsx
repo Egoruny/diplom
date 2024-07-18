@@ -1,22 +1,21 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { SyntheticEvent } from "react";
 import cn from "classnames";
 import styles from "./button.module.css";
 
 type ButtonProps = {
-	text?: string;
+	text?: string | ReactNode ;
 	type?: "primary" | "blue" | "defult" | "text";
 	size?: "middle" | "large" | "small";
-	onClick?: (e: SyntheticEvent) => void;
+	onClick?: (e?: SyntheticEvent) => void;
 	icon?: string;
 	className?: string;
 	shape?: boolean;
-	iconSize?:number
+	iconSize?: number;
+	disabled?: boolean;
 };
 
-
-
-export const Button:FC<ButtonProps> = ({
+export const Button: FC<ButtonProps> = ({
 	text,
 	type = "primary",
 	size = "middle",
@@ -24,13 +23,16 @@ export const Button:FC<ButtonProps> = ({
 	icon = "",
 	className,
 	shape = false,
-	iconSize = 20
+	iconSize = 20,
+	disabled = false,
 }) => {
 	return (
 		<button
-			onClick={e => onClick(e)}
+			disabled={disabled}
+			onClick={onClick}
 			className={cn(className, styles[type], styles[size], {
 				[styles.shape]: shape,
+				[styles.disabled]: disabled,
 			})}
 		>
 			{icon && (

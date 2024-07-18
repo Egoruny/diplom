@@ -17,8 +17,8 @@ export const ProductCharacteristics: FC<ProductCharacteristicsProps> = ({
 				<li>
 					<h4>{title}</h4>
 				</li>
-				{characteristicsItems.map(({ left, right }) => (
-					<li>
+				{characteristicsItems.map(({ left, right },index) => (
+					<li key={index}>
 						{left}______{right}
 					</li>
 				))}

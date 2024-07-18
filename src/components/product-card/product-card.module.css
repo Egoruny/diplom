@@ -25,6 +25,10 @@
 	justify-content: center;
 }
 
+.add_btn {
+	z-index: 10;
+}
+
 
 @media (max-width:840px) {
     .card_container {

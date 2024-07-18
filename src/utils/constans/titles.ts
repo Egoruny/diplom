@@ -5,5 +5,6 @@ type TitlesType = {
 export const titles: TitlesType = {
 	catalogTitle: "Каталог",
 	stockTitle:'Акции',
-	inBasketTitle:"В корзину"
+	inBasketTitle:"В корзину",
+	produсtInBasketTitle:"Товар в корзине"
 };

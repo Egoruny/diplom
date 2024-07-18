@@ -8,3 +8,9 @@
     .characteristics > ul :not(:first-child) {
         color:var( --gray-color-rich);
     }
+
+@media (max-width:950px) {
+    .characteristics > ul > li {
+        text-align: center;
+    }
+}

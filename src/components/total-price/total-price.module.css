@@ -1,0 +1,22 @@
+@import url('../../variables.css');
+
+.prise_container {
+    width: 280px;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+    gap: var(--gap-2s);
+    border-radius:var(--border-radius-m);
+    background:var(--gray-color-ligth)
+}
+
+
+@media ( max-width: 480px) {
+    .prise_container {
+        width: var(--full-size);
+        border-radius:0;
+    }
+}
+    
