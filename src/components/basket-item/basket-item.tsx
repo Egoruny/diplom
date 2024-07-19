@@ -38,10 +38,10 @@ export const BasketItem: FC<BasketItemProps> = ({
 
 
 	const inc = () => {
-		setInputValue(inputValue + 1)
+		setInputValue(prevValue => prevValue + 1)
 	}
 	const dec = () => {
-		setInputValue(inputValue === 1? 1:inputValue- 1)
+		setInputValue(prevValue => prevValue === 1? 1:prevValue- 1)
 	}
 
 
@@ -62,13 +62,11 @@ export const BasketItem: FC<BasketItemProps> = ({
 					<PriceAria price={priceWhithCount} discount={discount} />
 				</div>
 				<div>
-					<input type="checkbox" onChange={() => checkboxHandler(id)}  />
+					<input type="checkbox" onChange={() => checkboxHandler(id)}/>
 				</div>
 			</div>
 			<div className={styles.bottom_panel}>
-				{/* <InputNumber onChange={onChange}/> */}
-				<button onClick={inc}>inc+</button>
-				<button onClick={dec}>dec-</button>
+				<InputNumber onIncrement={inc} onDecrement={dec} value={inputValue} />
 			</div>
 		</div>
 	);

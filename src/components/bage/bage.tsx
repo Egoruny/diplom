@@ -8,15 +8,32 @@ type BageProps = {
 	type: "basket" | "card";
 	quantityGoodsINBasket?: number;
 };
-// сделать енам 
+
+enum bageType  {
+card = "card",
+basket= "basket"
+}
+
+const maxGoodsCount = 9;
+// сделать енам
 // опт
-export const Bage: FC<BageProps> = ({ discount, type = "card" }) => {
+export const Bage: FC<BageProps> = ({ discount, type = bageType.card }) => {
+	const quantityGoodsInBasket = useAppSelector(basketSliceSelect);
 
-	const quantityGoodsINBasket = useAppSelector(basketSliceSelect)
-
-	if (type === "card") {
+	if (type === bageType.card) {
 		return <div className={styles.bage_container_card}>{discount}%</div>;
-	} else if (type === "basket" && quantityGoodsINBasket.length) {
-		return <div className={styles.bage_container_basket}>{quantityGoodsINBasket.length <= 9?quantityGoodsINBasket.length:9 + '+'}</div>;
+	} else if (type === bageType.basket && quantityGoodsInBasket.length) {
+		const quantityGoodsMaxCount =
+			quantityGoodsInBasket.length <= maxGoodsCount
+				? quantityGoodsInBasket.length
+				: `${maxGoodsCount}+`;
+
+		return (
+			<div className={styles.bage_container_basket}>
+				{quantityGoodsMaxCount}
+			</div>
+		);
+	} else {
+		return null;
 	}
 };

@@ -3,7 +3,7 @@
 
 .container {
     border-top:var(--border-heigth-4xs) solid var(--gray-color);
-    padding-top: 10px;
+    padding: 10px 0;
 }
 
 .top_panel {

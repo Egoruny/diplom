@@ -10,6 +10,7 @@ import { TotalPrice } from "@components/total-price/total-price";
 import { PageHeader } from "@components/page-header/page-header";
 import { BasketItem } from "@components/basket-item/basket-item";
 import { basketSliceSelect } from "@redux/slices/basket-slice/basket-slice-selectors";
+import { getBasketItemsSelect } from "@redux/slices/product-slice/product-slice-selectors";
 
 import { calculateTotalPrice } from "@utils/calculate-total-price";
 
@@ -25,6 +26,8 @@ export const BasketPage = () => {
 	const dispatch = useAppDispatch()
 	const [idsArray, setIdsArray] = useState([]);
 	const basketItems = useAppSelector(basketSliceSelect);
+	const basketItems1 = useAppSelector(getBasketItemsSelect);
+	console.log(basketItems1)
 
 
 	const onSetIds = (id:string) => {
