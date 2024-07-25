@@ -4,15 +4,16 @@ import cn from "classnames";
 import styles from "./button.module.css";
 
 type ButtonProps = {
-	text?: string | ReactNode ;
+	text?: string | ReactNode;
 	type?: "primary" | "blue" | "defult" | "text";
 	size?: "middle" | "large" | "small";
 	onClick?: (e: SyntheticEvent) => void;
-	icon?: string;
+	icon?: ReactNode;
 	className?: string;
 	shape?: boolean;
-	iconSize?: number;
 	disabled?: boolean;
+	htmlType?: "button" | "submit" | "reset";
+	form?: string;
 };
 
 export const Button: FC<ButtonProps> = ({
@@ -23,8 +24,10 @@ export const Button: FC<ButtonProps> = ({
 	icon = "",
 	className,
 	shape = false,
-	iconSize = 20,
 	disabled = false,
+	htmlType = "button",
+	form,
+	...attrs
 }) => {
 	return (
 		<button
@@ -34,14 +37,12 @@ export const Button: FC<ButtonProps> = ({
 				[styles.shape]: shape,
 				[styles.disabled]: disabled,
 			})}
+			type={htmlType}
+			form={form}
+			{...attrs}
 		>
 			{icon && (
-				<img
-					src={icon}
-					width={iconSize}
-					height={iconSize}
-					alt="btn-icon"
-				/>
+			icon
 			)}
 			{text}
 		</button>

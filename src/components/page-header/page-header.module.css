@@ -1,13 +1,17 @@
-@import url('../../variables.css');
-
+@import url("../../variables.css");
 
 .product_page_header {
-    display: flex;
-    align-items: start;
-    flex-direction: column;
-    gap: var(--gap-2s);
+	display: flex;
+	align-items: start;
+	flex-direction: column;
+	gap: var(--gap-2s);
+	margin-bottom: var(--gap-m);
 }
 
 .back_btn {
-    border:none;
+	border: none;
+}
+
+.icon {
+	font-size: var(--gap-xl);
 }

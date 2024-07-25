@@ -6,6 +6,11 @@
     
 }
 
+.icon {
+    font-size: 30px;
+    color:var(--gray-color);
+}
+
 .window {
     overflow: hidden;
     height:var(--full-size);

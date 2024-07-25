@@ -8,8 +8,8 @@ import profileIcon from "../../assets/icon_profile.svg";
 import { PATH } from "@utils/constans/path";
 
 import styles from "./navigation-menu.module.css";
-
-// const navMenuData = [basketIcon, profileIcon];
+import { AiOutlineUser } from "react-icons/ai";
+import { SlBasket  } from "react-icons/sl";
 
 export const NavigationMenu = () => {
 	const navigate = useNavigate();
@@ -29,7 +29,7 @@ export const NavigationMenu = () => {
 						<Bage type="basket" />
 						<Button
 							type="defult"
-							icon={basketIcon}
+							icon={<SlBasket className={styles.icon}/>}
 							size="small"
 							onClick={navigeteMenuClick}
 						/>
@@ -39,7 +39,7 @@ export const NavigationMenu = () => {
 				<li>
 					<Button
 						type="defult"
-						icon={profileIcon}
+						icon={<AiOutlineUser className={styles.icon}/>}
 						size="small"
 					/>
 				</li>

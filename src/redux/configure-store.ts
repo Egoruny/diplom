@@ -1,11 +1,11 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import productSlice from "./slices/product-slice/product-slice";
-import basketSlice from "./slices/basket-slice/basket-slice";
+import orderingSlice from "./slices/ordering-slice/ordering-slice";
 
 export const store = configureStore({
 	reducer: combineReducers({
 		productSlice,
-		basketSlice,
+		orderingSlice,
 	}),
 });
 

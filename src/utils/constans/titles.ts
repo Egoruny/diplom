@@ -6,5 +6,6 @@ export const titles: TitlesType = {
 	catalogTitle: "Каталог",
 	stockTitle:'Акции',
 	inBasketTitle:"В корзину",
-	produсtInBasketTitle:"Товар в корзине"
+	produсtInBasketTitle:"Товар в корзине",
+	total:"Итого:"
 };

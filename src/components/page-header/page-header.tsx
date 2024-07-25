@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@components/button/button";
 import { Breadcrambs } from "@components/breadcrambs/breadcrambs";
 
-import backIcon from "../../assets/back.svg";
+import { AiOutlineLeft } from "react-icons/ai";
 
 import styles from "./page-header.module.css";
 
@@ -25,7 +25,7 @@ export const PageHeader:FC<PageHeaderProps> = ({title}) => {
 			<Button
 				type="defult"
 				className={styles.back_btn}
-				icon={backIcon}
+				icon={<AiOutlineLeft className={styles.icon}/>}
 				size="small"
 				onClick={goBack}
 				text={<h2>{title}</h2>}

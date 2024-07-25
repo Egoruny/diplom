@@ -1,5 +1,5 @@
 import { setItemInBasket } from "@redux/slices/product-slice/product-slice"
-import { setBasketItem } from "@redux/slices/basket-slice/basket-slice"
+import { setBasketItem } from "@redux/slices/ordering-slice/basket-slice"
 import { useAppDispatch } from "./typed-redux-hooks"
 import { BasketItemType } from "@types/basket-item-type";
 

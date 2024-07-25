@@ -1,6 +1,10 @@
-import { useAppSelector } from "../../hooks/typed-redux-hooks";
+import { useAppSelector,useAppDispatch } from "../../hooks/typed-redux-hooks";
 import { useState } from "react";
-import { useAddProduct } from "@hooks/add-product";
+
+
+
+import { toggleItemInBasket } from "@redux/slices/product-slice/product-slice"
+
 
 import { selectedProductSelect } from "../../redux/slices/product-slice/product-slice-selectors";
 
@@ -24,20 +28,20 @@ const imgHeigth = 600;
 const alt = "product";
 
 export const ProductPage = () => {
+	const dispatch = useAppDispatch()
 	const selectedProduct: SelectedProductType | null = useAppSelector(
 		selectedProductSelect
 	);
-	const { addProductInBasket } = useAddProduct();
 	const [productColor, setProductColor] = useState("черный");
-
+	
 	const setColor = e => {
 		setProductColor(e.target.value);
 	};
 
 
+		
 	if (selectedProduct === null) return <div>not found</div>;
 
-	const { characteristics, colors, ...basketItem } = selectedProduct;
 
 
 
@@ -80,7 +84,7 @@ export const ProductPage = () => {
 					price={selectedProduct.price}
 					discount={selectedProduct.discount}
 					btnText={titles.inBasketTitle}
-					onClick={() => addProductInBasket(basketItem)}
+					onClick={() => dispatch(toggleItemInBasket(selectedProduct.id))}
 					disabledBtn={selectedProduct.inBasket}
 				/>
 			</div>
@@ -88,9 +92,4 @@ export const ProductPage = () => {
 	);
 };
 
-// id:selectedProduct.id,
-// productDiscription:selectedProduct.productDiscription,
-// price:selectedProduct.price,
-// discount:selectedProduct.discount,
-// imageSrc:selectedProduct.imageSrc,
-// inBasketCount:selectedProduct.inBasketCount
+

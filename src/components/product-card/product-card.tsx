@@ -4,13 +4,14 @@ import { PriceAria } from "../../components/price-aria/price-aria";
 import { Button } from "../../components/button/button";
 import { Bage } from "../../components/bage/bage";
 
-import { useAddProduct } from "@hooks/add-product";
+
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/typed-redux-hooks";
 
 import { PATH } from "../../utils/constans/path";
 
 import { setSelectedProduct } from "../../redux/slices/product-slice/product-slice";
+import { toggleItemInBasket } from "@redux/slices/product-slice/product-slice"
 
 
 import { SelectedProductType } from "@types/selected-product-type";
@@ -53,13 +54,12 @@ export const ProductCard: FC<ProductCardProps> = ({
 	inBasket,
 	inBasketCount,
 }) => {
-	const {addProductInBasket} = useAddProduct()
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
 	const addProduct = (e:SyntheticEvent, selectedProduct:BasketItemType) => {
 		e.stopPropagation();
-		addProductInBasket(selectedProduct)
+		dispatch(toggleItemInBasket(selectedProduct.id))
 	};
 
 
@@ -109,7 +109,7 @@ export const ProductCard: FC<ProductCardProps> = ({
 						: titles.produсtInBasketTitle
 				}
 				type="primary"
-				onClick={e =>
+				onClick={(e) =>
 					addProduct(e,{
 						id,
 						productDiscription,

@@ -3,8 +3,6 @@ import { discountData } from "@utils/data";
 import { ProductType } from "@types/product-type";
 import { SelectedProductType } from "@types/selected-product-type";
 
-
-
 type ProductSliceType = {
 	selectedProduct: SelectedProductType | null;
 	products: ProductType[];
@@ -19,43 +17,49 @@ const productSlice = createSlice({
 	name: "productSlice",
 	initialState,
 	reducers: {
-		setSelectedProduct(state: ProductSliceType, action:PayloadAction<SelectedProductType>) {
+		setSelectedProduct(
+			state: ProductSliceType,
+			action: PayloadAction<SelectedProductType>
+		) {
 			state.selectedProduct = action.payload;
 		},
 
-		setItemInBasket(state:ProductSliceType, action:PayloadAction<string>) {
-			const id = action.payload
+		toggleItemInBasket(
+			state: ProductSliceType,
+			action: PayloadAction<string>
+		) {
+			const id = action.payload;
 
-			if(state.selectedProduct) {
-				state.selectedProduct = {...state.selectedProduct,inBasket:true}
+			if (state.selectedProduct) {
+				state.selectedProduct = {
+					...state.selectedProduct,
+					inBasket: true,
+				};
 			}
 
-			state.products= state.products.map(product => {
+			state.products = state.products.map(product => {
 				if (product.id === id) {
-					return { ...product, inBasket: true };
+					return { ...product, inBasket: !product.inBasket };
 				} else {
 					return product;
 				}
 			});
 		},
-
-		setItemsOutBasket (state,action:PayloadAction<string[]>) {
-			const ids = action.payload
-
-			if(state.selectedProduct) {
-				state.selectedProduct = {...state.selectedProduct,inBasket:false}
-			}
-
-			state.products= state.products.map(product => {
-				if (ids.includes(product.id)) {
-					return { ...product, inBasket: false };
+		setCountItem(
+			state,
+			action: PayloadAction<{ id: string; value: number }>
+		) {
+			const { id, value } = action.payload;
+			state.products = state.products.map(basketItem => {
+				if (basketItem.id === id) {
+					return { ...basketItem, inBasketCount: value };
 				} else {
-					return product;
+					return basketItem;
 				}
 			});
-		}
+		},
 	},
 });
 
-export const { setSelectedProduct,setItemInBasket,setItemsOutBasket } = productSlice.actions;
+export const { setSelectedProduct, toggleItemInBasket, setCountItem } = productSlice.actions;
 export default productSlice.reducer;

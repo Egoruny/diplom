@@ -1,14 +1,17 @@
-// import { useForm, SubmitHandler } from "react-hook-form";
-import { FC,useEffect,useState } from "react";
+import { FC, useEffect, useState,memo } from "react";
+
+
 import { PriceAria } from "@components/price-aria/price-aria";
 import { InputNumber } from "@components/input-number/input-number";
+import { Button } from "@components/button/button";
 
-import { useAppDispatch } from "@hooks/typed-redux-hooks";
 
-import { setCountItem } from "@redux/slices/basket-slice/basket-slice";
 
+import { MdDelete } from "react-icons/md";
 
 import styles from "./basket-item.module.css";
+
+
 
 type BasketItemProps = {
 	id: string;
@@ -17,10 +20,9 @@ type BasketItemProps = {
 	price: number;
 	productDiscription: string;
 	inBasketCount: number;
-	checkboxHandler:(id:string) => void
+	deleteItem: (id: string) => void;
+	setCountItem: (id:string,value:number) => void;
 };
-
-
 
 export const BasketItem: FC<BasketItemProps> = ({
 	id,
@@ -29,27 +31,22 @@ export const BasketItem: FC<BasketItemProps> = ({
 	price,
 	productDiscription,
 	inBasketCount,
-	checkboxHandler
+	deleteItem,
+	setCountItem,
 }) => {
-	const dispatch = useAppDispatch();
-	const [inputValue,setInputValue] = useState(inBasketCount)
+	const [inputValue, setInputValue] = useState(inBasketCount);
 	const priceWhithCount = price * inBasketCount;
 
-
-
-	const inc = () => {
-		setInputValue(prevValue => prevValue + 1)
-	}
-	const dec = () => {
-		setInputValue(prevValue => prevValue === 1? 1:prevValue- 1)
-	}
-
-
+	const incBasketCount = () => {
+		setInputValue(prevValue => prevValue + 1);
+	};
+	const decBasketCount = () => {
+		setInputValue(prevValue => (prevValue === 1 ? 1 : prevValue - 1));
+	};
 
 	useEffect(() => {
-		dispatch(setCountItem({id,value:inputValue}))
-	},[id,inputValue,dispatch])
-
+		setCountItem(id,inputValue);
+	}, [id, inputValue]);
 
 	return (
 		<div className={styles.container}>
@@ -62,11 +59,24 @@ export const BasketItem: FC<BasketItemProps> = ({
 					<PriceAria price={priceWhithCount} discount={discount} />
 				</div>
 				<div>
-					<input type="checkbox" onChange={() => checkboxHandler(id)}/>
+					{/* <input
+						type="checkbox"
+						onChange={() => checkboxHandler(id)}
+					/> */}
 				</div>
 			</div>
 			<div className={styles.bottom_panel}>
-				<InputNumber onIncrement={inc} onDecrement={dec} value={inputValue} />
+				<Button
+					icon={<MdDelete className={styles.icon}/>}
+					type="defult"
+					size="small"
+					onClick={() => deleteItem(id)}
+				/>
+				<InputNumber
+					onIncrement={incBasketCount}
+					onDecrement={decBasketCount}
+					value={inputValue}
+				/>
 			</div>
 		</div>
 	);

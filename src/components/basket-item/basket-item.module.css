@@ -37,6 +37,10 @@
     gap: 15px;
 }
 
+.icon {
+    font-size: var(--gap-xl);
+}
+
 @media (min-width:640px) {
     .container {
         border:none;

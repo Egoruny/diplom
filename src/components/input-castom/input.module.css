@@ -1,0 +1,91 @@
+@import url("../../variables.css");
+
+.input_field {
+	max-width: 800px;
+	width: 100%;
+	position: relative;
+}
+
+.input_header {
+	width: 100%;
+	border: none;
+	border-radius: 10px;
+	background: var(--gray-color);
+	padding: var(--gap-2s);
+	color: var(--white-color);
+}
+
+.input_header:focus {
+	outline: none;
+}
+
+.icon_field {
+	position: absolute;
+	top: 50%;
+	left: var(--gap-2s);
+	transform: translateY(-50%);
+	display: flex;
+	align-items: center;
+	gap: var(--gap-3xs);
+}
+
+.fa {
+	padding: 10px;
+	background: url("https://img.icons8.com/?size=100&id=132&format=png&color=000000")
+		no-repeat;
+	background-position: center;
+	background-size: contain;
+}
+
+.input_wrap {
+	position: relative;
+}
+
+.castom_placeholder {
+	position: absolute;
+	top: 50%;
+	left: 10px;
+	transform: translateY(-50%);
+	transition: all 0.2s ease;
+	color: var(--gray-color);
+}
+
+.input_defult {
+	width: var(--full-size);
+	padding: var(--gap-2s);
+	border: var(--border-heigth-2xs) solid var(--gray-color-rich);
+	border-radius: var(--border-radius-2s);
+}
+
+.input_defult::placeholder {
+	font-size: 12px;
+	opacity: 0;
+}
+
+.upPlaceholder ~ .castom_placeholder {
+	margin-top: -10px;
+	font-size: 12px;
+}
+
+.input_defult:focus {
+	outline: none;
+}
+
+.input_tel_email:focus::placeholder {
+	opacity: 1;
+}
+
+.error {
+	border: var(--border-heigth-2xs) solid var(--red-color);
+	color:var(--red-color);
+}
+
+.error_plaseholder {
+	color:var(--red-color);
+}
+
+@media (max-width: 480px) {
+	.input_field {
+		max-width: 100%;
+	}
+}

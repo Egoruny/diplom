@@ -1,16 +1,23 @@
-import { useState } from "react";
-import { useAppSelector,useAppDispatch } from "@hooks/typed-redux-hooks";
+import { useAppSelector, useAppDispatch } from "@hooks/typed-redux-hooks";
+import { useNavigate } from "react-router-dom";
 
-import { deleteItems } from "@redux/slices/basket-slice/basket-slice";
-import { setItemsOutBasket } from "@redux/slices/product-slice/product-slice";
+import {
+	toggleItemInBasket,
+	setCountItem,
+} from "@redux/slices/product-slice/product-slice";
+import { setTotalPrice } from "@redux/slices/ordering-slice/ordering-slice";
 
 import { Button } from "@components/button/button";
 import { TotalPrice } from "@components/total-price/total-price";
 
 import { PageHeader } from "@components/page-header/page-header";
 import { BasketItem } from "@components/basket-item/basket-item";
-import { basketSliceSelect } from "@redux/slices/basket-slice/basket-slice-selectors";
+
 import { getBasketItemsSelect } from "@redux/slices/product-slice/product-slice-selectors";
+
+
+import { PATH } from "@utils/constans/path";
+import { titles } from "@utils/constans/titles";
 
 import { calculateTotalPrice } from "@utils/calculate-total-price";
 
@@ -23,25 +30,22 @@ const emptyBaket = "Корзина пуста";
 import styles from "./basket-page.module.css";
 
 export const BasketPage = () => {
-	const dispatch = useAppDispatch()
-	const [idsArray, setIdsArray] = useState([]);
-	const basketItems = useAppSelector(basketSliceSelect);
-	const basketItems1 = useAppSelector(getBasketItemsSelect);
-	console.log(basketItems1)
+	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
+	const basketItems = useAppSelector(getBasketItemsSelect);
 
-
-	const onSetIds = (id:string) => {
-		if (idsArray.includes(id))
-            setIdsArray(idsArray.filter((element) => element !== id));
-        else setIdsArray([...idsArray, id]);
+	const makeAnOrder = () => {
+		dispatch(setTotalPrice(calculateTotalPrice(basketItems)))
+		navigate(PATH.OrderingPage);
 	};
 
+	const onDeleteItems = (deleteItemId: string) => {
+		dispatch(toggleItemInBasket(deleteItemId));
+	};
 
-	const onDeleteItems = () => {
-		dispatch(deleteItems(idsArray))
-		dispatch(setItemsOutBasket(idsArray))
-	}
-
+	const setCount = (id: string, value: number) => {
+		dispatch(setCountItem({ id, value }));
+	};
 
 	if (!basketItems.length) {
 		return (
@@ -60,17 +64,30 @@ export const BasketPage = () => {
 			<div className={styles.page_container}>
 				<div className={styles.items_container}>
 					<div className={styles.delete}>
-						{!!idsArray.length && <Button icon={basketIcon} type="defult" size="small" onClick={onDeleteItems} />}
+						{/* {!!idsArray.length && (
+							<Button
+								icon={basketIcon}
+								type="defult"
+								size="small"
+								onClick={onDeleteItems}
+							/>
+						)} */}
 					</div>
 					{basketItems.map(bascetItem => (
-						<BasketItem {...bascetItem} key={bascetItem.id} checkboxHandler={onSetIds} />
+						<BasketItem
+							{...bascetItem}
+							key={bascetItem.id}
+							setCountItem={setCount}
+							deleteItem={onDeleteItems}
+						/>
 					))}
 				</div>
 				<TotalPrice
-					title="Итого:"
+					title={titles.total}
 					price={calculateTotalPrice(basketItems)}
 					discount={0}
 					btnText={BtnText}
+					onClick={makeAnOrder}
 				/>
 			</div>
 		</div>

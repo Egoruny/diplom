@@ -20,6 +20,7 @@ export const InputNumber:FC<InputNumberProps> = ({onIncrement,onDecrement,value}
 				className={styles.quantity_num}
 				type="number"
 				value={value}
+				readOnly
 			/>
 			<Button type="defult" text="+" onClick={onIncrement} />
 		</div>

@@ -1,7 +1,8 @@
 import { FC } from "react";
 import styles from "./bage.module.css";
 import { useAppSelector } from "@hooks/typed-redux-hooks";
-import { basketSliceSelect } from "@redux/slices/basket-slice/basket-slice-selectors";
+import { getBasketItemsSelect } from "@redux/slices/product-slice/product-slice-selectors";
+
 
 type BageProps = {
 	discount?: number;
@@ -18,7 +19,7 @@ const maxGoodsCount = 9;
 // сделать енам
 // опт
 export const Bage: FC<BageProps> = ({ discount, type = bageType.card }) => {
-	const quantityGoodsInBasket = useAppSelector(basketSliceSelect);
+	const quantityGoodsInBasket = useAppSelector(getBasketItemsSelect);
 
 	if (type === bageType.card) {
 		return <div className={styles.bage_container_card}>{discount}%</div>;

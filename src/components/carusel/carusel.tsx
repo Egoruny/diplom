@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useState, useEffect } from "react";
 import { Button } from "@components/button/button";
 import rigtBtnIcon from "../../assets/Frame1.svg";
-import leftBtnIcon from "../../assets/Frame2.svg";
+import { AiFillCaretRight,AiFillCaretLeft  } from "react-icons/ai";
 
 import { CaruselItem } from "./carusel-item/carusel-item";
 
@@ -86,10 +86,9 @@ export const Carusel:FC<MyComponentProps> = ({ children }) => {
 				{shoodShowBtn && (
 					<Button
 						type="defult"
-						icon={rigtBtnIcon}
+						icon={<AiFillCaretRight className={styles.icon} />}
 						onClick={rightSlide}
 						className={styles.right}
-						iconSize={iconSize}
 					/>
 				)}
 				<div className={styles.window}>
@@ -105,10 +104,9 @@ export const Carusel:FC<MyComponentProps> = ({ children }) => {
 				{shoodShowBtn && (
 					<Button
 						type="defult"
-						icon={leftBtnIcon}
+						icon={<AiFillCaretLeft className={styles.icon}/>}
 						onClick={leftSlide}
 						className={styles.left}
-						iconSize={iconSize}
 					/>
 				)}
 			</div>
