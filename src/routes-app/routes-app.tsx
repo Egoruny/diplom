@@ -5,24 +5,9 @@ import { MainPage } from "../pages/main-page/main-page";
 import { ProductPage } from "../pages/product-page/product-page";
 import { BasketPage } from "@pages/basket-page/basket-page";
 import { OrderingPage } from "@pages/ordering-page/ordering-page";
+import { CatalogPage } from "@pages/catalog-page/catalog-page";
 
-// export const RoutesApp = () => {
-// 	return (
-// 		<Routes>
-// 			<Route path={PATH.Root} element={<Layout />}>
-// 				<Route index element={<MainPage />} />
-// 				<Route
-// 					path={`${PATH.ProductPage}/:id`}
-// 					element={<ProductPage />}
-// 					handle={{
-// 						crumb: () => <span>что то</span>,
-// 					}}
-// 				/>
-// 				<Route path={PATH.BasketPage} element={<BasketPage />} />
-// 			</Route>
-// 		</Routes>
-// 	);
-// };
+
 
 export const router = createBrowserRouter([
 	{
@@ -66,6 +51,19 @@ export const router = createBrowserRouter([
 						return (
 							<Link to={PATH.OrderingPage}>
 								Оформление заказа/
+							</Link>
+						);
+					},
+				},
+			},
+			{
+				path: `${PATH.CatalogPage}/:catalogId`,
+				element: <CatalogPage />,
+				handle: {
+					crumb: () => {
+						return (
+							<Link to={PATH.OrderingPage}>
+								Каталог
 							</Link>
 						);
 					},

@@ -1,9 +1,9 @@
 import { FC } from "react";
-import { CharacteristicsType } from "@types/product-type";
+import { InfoType } from "@types/product-type";
 import styles from "./product-characteristics.module.css";
 
 type ProductCharacteristicsProps = {
-	characteristicsItems: CharacteristicsType[];
+	characteristicsItems: InfoType[];
 };
 
 const title = "Характеристики:";
@@ -17,9 +17,9 @@ export const ProductCharacteristics: FC<ProductCharacteristicsProps> = ({
 				<li>
 					<h4>{title}</h4>
 				</li>
-				{characteristicsItems.map(({ left, right },index) => (
+				{characteristicsItems.map(({ title, description },index) => (
 					<li key={index}>
-						{left}______{right}
+						{title}______{description}
 					</li>
 				))}
 			</ul>

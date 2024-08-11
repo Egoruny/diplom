@@ -1,5 +1,6 @@
 import { useAppSelector,useAppDispatch } from "../../hooks/typed-redux-hooks";
-import { useState } from "react";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 
 
@@ -10,14 +11,15 @@ import { selectedProductSelect } from "../../redux/slices/product-slice/product-
 
 import { titles } from "@utils/constans/titles";
 
-import { InputButton } from "@components/input-button/input-button.tsx";
 import { ProductCharacteristics } from "@components/product-characteristics/product-characteristics";
 import { PageHeader } from "@components/page-header/page-header";
 import { TotalPrice } from "@components/total-price/total-price";
 
+import { getPoductById } from "@redux/async-actions";
+
 import { SelectedProductType } from "@types/selected-product-type";
 
-import { colors1 } from "@utils/constans/colors";
+
 
 import styles from "./product-page.module.css";
 
@@ -29,20 +31,20 @@ const alt = "product";
 
 export const ProductPage = () => {
 	const dispatch = useAppDispatch()
+	const {id} = useParams()
 	const selectedProduct: SelectedProductType | null = useAppSelector(
 		selectedProductSelect
 	);
-	const [productColor, setProductColor] = useState("черный");
 	
-	const setColor = e => {
-		setProductColor(e.target.value);
-	};
 
+	useEffect(() => {
+		dispatch(getPoductById(id))
+	},[])
 
 		
 	if (selectedProduct === null) return <div>not found</div>;
 
-
+console.log(selectedProduct)
 
 
 	return (
@@ -51,10 +53,9 @@ export const ProductPage = () => {
 			<div className={styles.product_container}>
 				<figure
 				className={styles.img_container}
-					style={{ border: `3px solid ${colors1.get(productColor)}` }}
 				>
 					<img
-						src={selectedProduct.imageSrc}
+						src={selectedProduct.img}
 						alt={alt}
 						width={imgWidth}
 						height={imgHeigth}
@@ -62,21 +63,13 @@ export const ProductPage = () => {
 				</figure>
 
 				<div className={styles.product_characteristics_container}>
-					<h1>{selectedProduct.productDiscription}</h1>
+					<h1>{selectedProduct.name}</h1>
 					<div className={styles.chenge_color_container}>
-						<span>цвет:{productColor}</span>
 						<div className={styles.input_btn_groupe}>
-							{selectedProduct.colors.map(({ color }, index) => (
-								<InputButton
-									onClick={setColor}
-									value={color}
-									key={index}
-								/>
-							))}
 						</div>
 					</div>
 					<ProductCharacteristics
-						characteristicsItems={selectedProduct.characteristics}
+						characteristicsItems={selectedProduct.info}
 					/>
 				</div>
 

@@ -5,7 +5,7 @@ import { CaruselContext } from "../carusel-context";
 
 import styles from "./carusel-item.module.css";
 
-type CaruselItemProps = {
+export type CaruselItemProps = {
 	children: JSX.Element;
 };
 

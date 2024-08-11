@@ -1,12 +1,12 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { useState, useEffect } from "react";
 import { Button } from "@components/button/button";
-import rigtBtnIcon from "../../assets/Frame1.svg";
 import { AiFillCaretRight,AiFillCaretLeft  } from "react-icons/ai";
 
 import { CaruselItem } from "./carusel-item/carusel-item";
 
 import { CaruselContext } from "./carusel-context";
+import { CaruselItemProps } from "./carusel-item/carusel-item";
 
 import styles from "./carusel.module.css";
 
@@ -14,15 +14,15 @@ const childWidth = 100;
 
 const interval = 3000;
 
-const iconSize = 40;
+
 
 type ItervalType = NodeJS.Timeout | undefined;
 
-type MyComponentProps = {
+type CaruselProps = {
 	children: JSX.Element[];
 };
 
-export const Carusel:FC<MyComponentProps> = ({ children }) => {
+export const Carusel:FC<CaruselProps> & { Item: FC<CaruselItemProps> } = ({ children }) => {
 	const [childrenCounter, setChildrenCounter] = useState(0);
 	const [, setSlideCount] = useState(0);
 	const [offset, setOffset] = useState(0);

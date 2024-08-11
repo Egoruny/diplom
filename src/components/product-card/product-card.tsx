@@ -30,27 +30,23 @@ const imageSize = 200;
 
 
 type ProductCardProps = {
-	id: string;
-	productDiscription: string;
+	id: number;
+	name: string;
 	price: number;
 	discount: number;
-	isAvalible: boolean;
-	imageSrc: string;
-	characteristics: any;
-	colors: any;
+	entireProduct: number;
+	img: string;
 	inBasket: boolean;
 	inBasketCount:number;
 };
 
 export const ProductCard: FC<ProductCardProps> = ({
 	id,
-	productDiscription,
+	name,
 	price,
 	discount,
-	isAvalible,
-	imageSrc,
-	characteristics,
-	colors,
+	entireProduct,
+	img,
 	inBasket,
 	inBasketCount,
 }) => {
@@ -64,43 +60,32 @@ export const ProductCard: FC<ProductCardProps> = ({
 
 
 
-	const showProductPage = (selectedProduct:SelectedProductType) => {
-		dispatch(setSelectedProduct(selectedProduct));
+	const showProductPage = () => {
 		navigate(`${PATH.ProductPage}/${id}`);
 	};
 	return (
 		<div
 			className={styles.card_container}
 			onClick={() =>
-				showProductPage({
-					id,
-					price,
-					productDiscription,
-					imageSrc,
-					characteristics,
-					colors,
-					discount,
-					inBasketCount,
-					inBasket
-				})
+				showProductPage()
 			}
 		>
 			<figure className={styles.img_container}>
 				<img
-					src={imageSrc}
+					src={img}
 					width={imageSize}
 					height={imageSize}
 					className={styles.card_img}
 				/>
 			</figure>
-			<h4>{productDiscription}</h4>
+			<h4>{name}</h4>
 			<PriceAria price={price} discount={discount} />
 			<p
 				className={
-					styles[`${isAvalible ? "is_avalible" : "is_not_avalible"}`]
+					styles[`${entireProduct ? "is_avalible" : "is_not_avalible"}`]
 				}
 			>
-				{isAvalible ? available : notAvailable}
+				{entireProduct ? available : notAvailable}
 			</p>
 			<Button
 				text={
@@ -112,10 +97,10 @@ export const ProductCard: FC<ProductCardProps> = ({
 				onClick={(e) =>
 					addProduct(e,{
 						id,
-						productDiscription,
+						name,
 						price,
 						discount,
-						imageSrc,
+						img,
 						inBasketCount,
 					})
 				}

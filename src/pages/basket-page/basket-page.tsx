@@ -7,7 +7,7 @@ import {
 } from "@redux/slices/product-slice/product-slice";
 import { setTotalPrice } from "@redux/slices/ordering-slice/ordering-slice";
 
-import { Button } from "@components/button/button";
+
 import { TotalPrice } from "@components/total-price/total-price";
 
 import { PageHeader } from "@components/page-header/page-header";
@@ -15,13 +15,11 @@ import { BasketItem } from "@components/basket-item/basket-item";
 
 import { getBasketItemsSelect } from "@redux/slices/product-slice/product-slice-selectors";
 
-
 import { PATH } from "@utils/constans/path";
 import { titles } from "@utils/constans/titles";
 
 import { calculateTotalPrice } from "@utils/calculate-total-price";
 
-import basketIcon from "../../assets/deleteIcon.svg";
 
 const BtnText = "Оформить заказ";
 const title = "Корзина";
@@ -33,9 +31,10 @@ export const BasketPage = () => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 	const basketItems = useAppSelector(getBasketItemsSelect);
+	const isEmptyBasket = !basketItems.length;
 
 	const makeAnOrder = () => {
-		dispatch(setTotalPrice(calculateTotalPrice(basketItems)))
+		dispatch(setTotalPrice(calculateTotalPrice(basketItems)));
 		navigate(PATH.OrderingPage);
 	};
 
@@ -47,40 +46,24 @@ export const BasketPage = () => {
 		dispatch(setCountItem({ id, value }));
 	};
 
-	if (!basketItems.length) {
-		return (
-			<>
-				<PageHeader title={title} />
-				<div className={styles.empty}>
-					<h2>{emptyBaket}</h2>
-				</div>
-			</>
-		);
-	}
-
 	return (
 		<div className={styles.main_container}>
 			<PageHeader title={title} />
 			<div className={styles.page_container}>
 				<div className={styles.items_container}>
-					<div className={styles.delete}>
-						{/* {!!idsArray.length && (
-							<Button
-								icon={basketIcon}
-								type="defult"
-								size="small"
-								onClick={onDeleteItems}
+					<div className={styles.delete}></div>
+					{isEmptyBasket ? (
+						<h2>{emptyBaket}</h2>
+					) : (
+						basketItems.map(bascetItem => (
+							<BasketItem
+								{...bascetItem}
+								key={bascetItem.id}
+								setCountItem={setCount}
+								deleteItem={onDeleteItems}
 							/>
-						)} */}
-					</div>
-					{basketItems.map(bascetItem => (
-						<BasketItem
-							{...bascetItem}
-							key={bascetItem.id}
-							setCountItem={setCount}
-							deleteItem={onDeleteItems}
-						/>
-					))}
+						))
+					)}
 				</div>
 				<TotalPrice
 					title={titles.total}
@@ -88,6 +71,7 @@ export const BasketPage = () => {
 					discount={0}
 					btnText={BtnText}
 					onClick={makeAnOrder}
+					disabledBtn={isEmptyBasket}
 				/>
 			</div>
 		</div>

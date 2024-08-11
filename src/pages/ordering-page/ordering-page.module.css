@@ -20,3 +20,11 @@ margin-bottom: var(--gap-m);
     flex-direction: column;
     gap: var(--gap-2s);
 }
+
+
+@media(min-width:640px ) {
+    .main_container {
+        max-width: 400px;
+
+    }
+}

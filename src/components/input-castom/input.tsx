@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { UseFormRegister, FieldValues } from "react-hook-form";
+import { UseFormRegister, FieldValues,FieldError,FieldErrorsImpl,Merge } from "react-hook-form";
 
 import cn from "classnames";
 import styles from "./input.module.css";
@@ -11,10 +11,12 @@ type InputProps = {
 	register: UseFormRegister<FieldValues>;
 	required?: boolean;
 	value?:string
-	error?: string
+	error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> 
 };
 
 const search = "поиск";
+
+
 
 export const Input: FC<InputProps> = ({
 	type = "text",
@@ -36,7 +38,6 @@ export const Input: FC<InputProps> = ({
 	});
 	const clasesCastomPlaceholder = cn(styles.castom_placeholder,{[styles.error_plaseholder]:error,})
 
-	console.log(required)
 
 	if (type === "search") {
 		return (

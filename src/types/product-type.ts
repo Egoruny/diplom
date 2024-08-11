@@ -1,21 +1,10 @@
 export type ProductType = {
-    id: string,
-    productDiscription: string
+    id: number
+    name: string
     price: number
     discount: number
-    isAvalible: boolean
-    inBasket: boolean
+    entireProduct: number
     inBasketCount: number
-    imageSrc:string
-    characteristics: CharacteristicsType[]
-    colors: colortye[],
+    img:string
 }
 
-export type CharacteristicsType = {
-    left:string
-    right:string | number
-}
-
-type colortye = {
-    color:string
-}

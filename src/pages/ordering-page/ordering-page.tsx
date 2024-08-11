@@ -8,7 +8,11 @@ import { Form } from "@components/form/form";
 import { Payment } from "@components/payment/payment";
 import { TotalPrice } from "@components/total-price/total-price";
 
-import { totalPriceSelect } from "@redux/slices/ordering-slice/ordering-slice-selectors";
+import { getBasketItemsSelect } from "@redux/slices/product-slice/product-slice-selectors";
+
+import { calculateTotalPrice } from "@utils/calculate-total-price";
+
+
 
 import { titles } from "@utils/constans/titles";
 
@@ -40,11 +44,11 @@ const paymetTile = "Оплата";
 const formContainerTitle = "Контактные данные";
 
 export const OrderingPage = () => {
-	const totalPrice = useAppSelector(totalPriceSelect);
+	const basketItems = useAppSelector(getBasketItemsSelect);
 	const {
 		handleSubmit,
 		register,
-		formState: { errors },
+		formState: { errors, isDirty, isValid  },
 		reset,
 		watch,
 	} = useForm({
@@ -54,6 +58,10 @@ export const OrderingPage = () => {
 		reset();
 		console.log(data);
 	};
+
+	console.log(isDirty, isValid)
+
+
 
 
 	return (
@@ -65,7 +73,7 @@ export const OrderingPage = () => {
 				<Form
 					className={styles.form}
 					onFinish={handleSubmit(onSubmit)}
-					id={"test"}
+					id={"order"}
 				>
 					{formItems.map(formItem => (
 						<Input
@@ -81,11 +89,12 @@ export const OrderingPage = () => {
 			<Payment title={paymetTile} />
 			<TotalPrice
 				title={titles.total}
-				price={totalPrice}
+				price={calculateTotalPrice(basketItems)}
 				discount={0}
 				btnText={"Оплатить"}
+				disabledBtn={!isDirty || !isValid}
 				// onClick={}
-				formName="test"
+				formName="order"
 				btnType="submit"
 			/>
 		</div>

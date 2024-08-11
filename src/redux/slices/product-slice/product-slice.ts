@@ -2,14 +2,23 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { discountData } from "@utils/data";
 import { ProductType } from "@types/product-type";
 import { SelectedProductType } from "@types/selected-product-type";
+import { getProductTypes,getDiscountProduct,getPoductById,getPoductByCatalogId } from "@redux/async-actions";
+
+
+type CatalogType = {
+	id:number
+	name:string
+}
 
 type ProductSliceType = {
+	catalog:CatalogType[] 
 	selectedProduct: SelectedProductType | null;
 	products: ProductType[];
 };
 
 const initialState: ProductSliceType = {
-	products: discountData,
+	catalog:[],
+	products: [],
 	selectedProduct: null,
 };
 
@@ -24,9 +33,10 @@ const productSlice = createSlice({
 			state.selectedProduct = action.payload;
 		},
 
+
 		toggleItemInBasket(
 			state: ProductSliceType,
-			action: PayloadAction<string>
+			action: PayloadAction<number>
 		) {
 			const id = action.payload;
 
@@ -45,9 +55,11 @@ const productSlice = createSlice({
 				}
 			});
 		},
+
+
 		setCountItem(
 			state,
-			action: PayloadAction<{ id: string; value: number }>
+			action: PayloadAction<{ id: number; value: number }>
 		) {
 			const { id, value } = action.payload;
 			state.products = state.products.map(basketItem => {
@@ -58,7 +70,24 @@ const productSlice = createSlice({
 				}
 			});
 		},
+
+
 	},
+
+	extraReducers:(builder) => {
+		builder.addCase(getProductTypes.fulfilled,(state,action) => {
+			state.catalog = action.payload
+		})
+		builder.addCase(getDiscountProduct.fulfilled,(state,action) => {
+			state.products = action.payload
+		})
+		builder.addCase(getPoductById.fulfilled,(state,action) => {
+			state.selectedProduct = action.payload
+		})
+		builder.addCase(getPoductByCatalogId.fulfilled,(state,action) => {
+			state.products = action.payload
+		})
+	}
 });
 
 export const { setSelectedProduct, toggleItemInBasket, setCountItem } = productSlice.actions;

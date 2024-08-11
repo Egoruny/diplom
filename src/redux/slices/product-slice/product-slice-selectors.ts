@@ -7,3 +7,5 @@ export const getBasketItemsSelect = createSelector(
     productsSelect,
     (product) => product.filter(({inBasket}) => inBasket)
 )
+
+export const productTypeSelect = (state:RootState) => state.productSlice.catalog
