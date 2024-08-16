@@ -1,3 +1,3 @@
 import { ProductType } from "./product-type"
 
-export type BasketItemType  =  Omit<ProductType,"characteristics" | "colors" | "entireProduct" | "inBasket">
+export type CartItemType  =  Omit<ProductType,'entireProduct'> & {inBasketCount: number}

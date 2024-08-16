@@ -4,19 +4,18 @@ import { PriceAria } from "../../components/price-aria/price-aria";
 import { Button } from "../../components/button/button";
 import { Bage } from "../../components/bage/bage";
 
-
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../hooks/typed-redux-hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/typed-redux-hooks";
 
 import { PATH } from "../../utils/constans/path";
 
-import { setSelectedProduct } from "../../redux/slices/product-slice/product-slice";
-import { toggleItemInBasket } from "@redux/slices/product-slice/product-slice"
+import { setCartItem } from "@redux/slices/cart-slice/cart-slice";
+import { createItem } from "@redux/async-actions";
 
+import { getCartItems } from "@redux/slices/cart-slice/cart-selectors";
+import { getIsAuth, getUser } from "@redux/slices/auth-slice/auth-selectors";
 
-import { SelectedProductType } from "@types/selected-product-type";
-import { BasketItemType } from "@types/basket-item-type";
-
+import { CartItemType } from "@types/basket-item-type";
 
 import { titles } from "../../utils/constans/titles";
 
@@ -28,7 +27,6 @@ const notAvailable = "нет в наличии";
 
 const imageSize = 200;
 
-
 type ProductCardProps = {
 	id: number;
 	name: string;
@@ -36,8 +34,6 @@ type ProductCardProps = {
 	discount: number;
 	entireProduct: number;
 	img: string;
-	inBasket: boolean;
-	inBasketCount:number;
 };
 
 export const ProductCard: FC<ProductCardProps> = ({
@@ -47,18 +43,25 @@ export const ProductCard: FC<ProductCardProps> = ({
 	discount,
 	entireProduct,
 	img,
-	inBasket,
-	inBasketCount,
 }) => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
+	const cartItems = useAppSelector(getCartItems);
+	const isAuth = useAppSelector(getIsAuth);
+	const userId = useAppSelector(getUser);
 
-	const addProduct = (e:SyntheticEvent, selectedProduct:BasketItemType) => {
+	const isItemInCart = cartItems?.some(item => item.id === id);
+
+	const addProduct = (e: SyntheticEvent, selectedProduct: CartItemType) => {
 		e.stopPropagation();
-		dispatch(toggleItemInBasket(selectedProduct.id))
+
+		console.log(selectedProduct)
+		if (isAuth) {
+			dispatch(createItem({ itemId: selectedProduct.id, id: userId }));
+		} else {
+			dispatch(setCartItem(selectedProduct));
+		}
 	};
-
-
 
 	const showProductPage = () => {
 		navigate(`${PATH.ProductPage}/${id}`);
@@ -66,9 +69,7 @@ export const ProductCard: FC<ProductCardProps> = ({
 	return (
 		<div
 			className={styles.card_container}
-			onClick={() =>
-				showProductPage()
-			}
+			onClick={() => showProductPage()}
 		>
 			<figure className={styles.img_container}>
 				<img
@@ -82,29 +83,31 @@ export const ProductCard: FC<ProductCardProps> = ({
 			<PriceAria price={price} discount={discount} />
 			<p
 				className={
-					styles[`${entireProduct ? "is_avalible" : "is_not_avalible"}`]
+					styles[
+						`${entireProduct ? "is_avalible" : "is_not_avalible"}`
+					]
 				}
 			>
 				{entireProduct ? available : notAvailable}
 			</p>
 			<Button
 				text={
-					!inBasket
+					!isItemInCart
 						? titles.inBasketTitle
 						: titles.produсtInBasketTitle
 				}
 				type="primary"
-				onClick={(e) =>
-					addProduct(e,{
+				onClick={e =>
+					addProduct(e, {
 						id,
 						name,
 						price,
 						discount,
 						img,
-						inBasketCount,
+						inBasketCount: 1,
 					})
 				}
-				disabled={inBasket}
+				disabled={isItemInCart}
 				className={styles.add_btn}
 			/>
 			{Boolean(discount) && <Bage discount={discount} type="card" />}

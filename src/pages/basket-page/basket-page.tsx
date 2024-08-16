@@ -1,19 +1,20 @@
 import { useAppSelector, useAppDispatch } from "@hooks/typed-redux-hooks";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 
-import {
-	toggleItemInBasket,
-	setCountItem,
-} from "@redux/slices/product-slice/product-slice";
+
 import { setTotalPrice } from "@redux/slices/ordering-slice/ordering-slice";
-
+import { setCountItem,deleteItem } from "@redux/slices/cart-slice/cart-slice";
 
 import { TotalPrice } from "@components/total-price/total-price";
 
 import { PageHeader } from "@components/page-header/page-header";
 import { BasketItem } from "@components/basket-item/basket-item";
 
-import { getBasketItemsSelect } from "@redux/slices/product-slice/product-slice-selectors";
+import { getCartItems } from "@redux/slices/cart-slice/cart-selectors";
+import { getIsAuth,getUser } from "@redux/slices/auth-slice/auth-selectors";
+
+import { deleteItemByIds } from "@redux/async-actions";
+
 
 import { PATH } from "@utils/constans/path";
 import { titles } from "@utils/constans/titles";
@@ -30,19 +31,27 @@ import styles from "./basket-page.module.css";
 export const BasketPage = () => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
-	const basketItems = useAppSelector(getBasketItemsSelect);
+	const basketItems = useAppSelector(getCartItems);
 	const isEmptyBasket = !basketItems.length;
+	const isAuth = useAppSelector(getIsAuth)
+	const userId = useAppSelector(getUser)
 
 	const makeAnOrder = () => {
 		dispatch(setTotalPrice(calculateTotalPrice(basketItems)));
 		navigate(PATH.OrderingPage);
 	};
 
-	const onDeleteItems = (deleteItemId: string) => {
-		dispatch(toggleItemInBasket(deleteItemId));
+
+
+	const onDeleteItems = (deleteItemId: number) => {
+		if(isAuth) {
+			dispatch(deleteItemByIds({userId,deviceId:deleteItemId}))
+		} else {
+			dispatch(deleteItem(deleteItemId))
+		}
 	};
 
-	const setCount = (id: string, value: number) => {
+	const setCount = (id: number, value: number) => {
 		dispatch(setCountItem({ id, value }));
 	};
 
@@ -65,14 +74,18 @@ export const BasketPage = () => {
 						))
 					)}
 				</div>
+				<div>
 				<TotalPrice
 					title={titles.total}
 					price={calculateTotalPrice(basketItems)}
 					discount={0}
 					btnText={BtnText}
 					onClick={makeAnOrder}
-					disabledBtn={isEmptyBasket}
+					disabledBtn={isEmptyBasket || !isAuth}
 				/>
+				{!isAuth && !isEmptyBasket &&<p><Link to={PATH.Auth} >Авторизируйтесь</Link> что бы сделать заказ</p>}
+				</div>
+			
 			</div>
 		</div>
 	);

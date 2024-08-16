@@ -1,17 +1,22 @@
 import { FC, useState } from "react";
 import { UseFormRegister, FieldValues,FieldError,FieldErrorsImpl,Merge } from "react-hook-form";
-
+import {PATH} from '../../utils/constans/path'
+import { Link } from "react-router-dom";
 import cn from "classnames";
 import styles from "./input.module.css";
 
+
+
 type InputProps = {
 	type?: string;
-	inputName: string;
+	inputName?: string;
 	placeholder?: string;
 	register: UseFormRegister<FieldValues>;
 	required?: boolean;
 	value?:string
 	error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> 
+	options?:{id:number,name:string}[]
+	onSearch?:(e: React.ChangeEvent<HTMLInputElement>) => void
 };
 
 const search = "поиск";
@@ -25,7 +30,9 @@ export const Input: FC<InputProps> = ({
 	register,
 	required,
 	error = false,
-	value
+	value,
+	options,
+	onSearch
 }) => {
 	const [focus, setFocus] = useState(false);
 	const isTelOrEmail = type === "tel" || type === "email";
@@ -42,11 +49,13 @@ export const Input: FC<InputProps> = ({
 	if (type === "search") {
 		return (
 			<div className={styles.input_field}>
-				<input className={styles.input_header} type={type} />
-				<div className={styles.icon_field}>
-					<i className={styles.fa}></i>
-					<span>{search}</span>
-				</div>
+				<input className={styles.input_header} type={type} placeholder={search} onChange={onSearch} />
+				{!!options?.length && 
+				<div className={styles.options_stl}>
+				{options.map(item =>(
+					<li ><Link to={`${PATH.ProductPage}/${item.id}`}>{item.name}</Link></li>
+				) )}
+					</div>}
 			</div>
 		);
 	}

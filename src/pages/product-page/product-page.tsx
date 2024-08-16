@@ -2,12 +2,8 @@ import { useAppSelector,useAppDispatch } from "../../hooks/typed-redux-hooks";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-
-
-import { toggleItemInBasket } from "@redux/slices/product-slice/product-slice"
-
-
 import { selectedProductSelect } from "../../redux/slices/product-slice/product-slice-selectors";
+import { getCartItems } from "@redux/slices/cart-slice/cart-selectors";
 
 import { titles } from "@utils/constans/titles";
 
@@ -15,10 +11,13 @@ import { ProductCharacteristics } from "@components/product-characteristics/prod
 import { PageHeader } from "@components/page-header/page-header";
 import { TotalPrice } from "@components/total-price/total-price";
 
+import { setCartItem } from "@redux/slices/cart-slice/cart-slice";
+import { clearOptions } from "@redux/slices/product-slice/product-slice";
+
 import { getPoductById } from "@redux/async-actions";
 
 import { SelectedProductType } from "@types/selected-product-type";
-
+import { CartItemType } from "@types/basket-item-type";
 
 
 import styles from "./product-page.module.css";
@@ -32,19 +31,30 @@ const alt = "product";
 export const ProductPage = () => {
 	const dispatch = useAppDispatch()
 	const {id} = useParams()
-	const selectedProduct: SelectedProductType | null = useAppSelector(
+	const selectedProduct = useAppSelector(
 		selectedProductSelect
-	);
+	) as SelectedProductType;
+
+	const cartItems = useAppSelector(getCartItems)
+	const isItemInCart  = cartItems?.some((item) => item?.id === selectedProduct?.id)
+
+
 	
 
 	useEffect(() => {
+		if(id)
 		dispatch(getPoductById(id))
+
+		dispatch(clearOptions())
 	},[])
+
+	const addProduct = ( selectedProduct:CartItemType) => {
+		dispatch(setCartItem(selectedProduct))
+	};
 
 		
 	if (selectedProduct === null) return <div>not found</div>;
 
-console.log(selectedProduct)
 
 
 	return (
@@ -77,8 +87,15 @@ console.log(selectedProduct)
 					price={selectedProduct.price}
 					discount={selectedProduct.discount}
 					btnText={titles.inBasketTitle}
-					onClick={() => dispatch(toggleItemInBasket(selectedProduct.id))}
-					disabledBtn={selectedProduct.inBasket}
+					onClick={() => addProduct({
+						id:selectedProduct.id,
+						name:selectedProduct.name,	
+						price:selectedProduct.price,
+						discount:selectedProduct.discount,
+						img:selectedProduct.img,
+						inBasketCount:1
+					})}
+					disabledBtn={isItemInCart}
 				/>
 			</div>
 		</>

@@ -1,0 +1,17 @@
+@import url('../../variables.css');
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.main_container {
+    padding: 40px;
+    border: 2px solid var(--purpure-color);
+    border-radius: 8px;
+}
+
+.change_btn {
+    max-width: 200px;
+}

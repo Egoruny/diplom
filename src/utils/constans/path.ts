@@ -3,5 +3,6 @@ Root:'/',
 ProductPage:'/product-page',
 BasketPage:'/basket-page',
 OrderingPage:'/ordering',
-CatalogPage:'/catalog'
+CatalogPage:'/catalog',
+Auth:'/auth',
 }

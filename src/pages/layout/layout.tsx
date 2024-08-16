@@ -4,6 +4,10 @@ import styles from "./layout.module.css";
 import { Header } from "../../components/header/header";
 
 export const Layout = () => {
+
+
+
+
 	return (
 		<div className={styles.wrapper}>
 			<Header />

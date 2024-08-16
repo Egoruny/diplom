@@ -1,6 +1,18 @@
 @import url('../../variables.css');
 
 
+.input_field {
+	max-width: 800px;
+	width: 100%;
+	position: relative;
+}
+
+.input_header {
+	width: 100%;
+	border: none;
+	border-radius: 10px;
+}
+
 .header {
 display: flex;
 justify-content: space-between;

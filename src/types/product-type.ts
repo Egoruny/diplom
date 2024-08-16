@@ -4,7 +4,6 @@ export type ProductType = {
     price: number
     discount: number
     entireProduct: number
-    inBasketCount: number
     img:string
 }
 

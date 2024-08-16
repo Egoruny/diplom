@@ -14,22 +14,22 @@ import styles from "./basket-item.module.css";
 
 
 type BasketItemProps = {
-	id: string;
+	id: number;
 	discount: number;
-	imageSrc: string;
+	img: string;
 	price: number;
-	productDiscription: string;
+	name: string;
 	inBasketCount: number;
-	deleteItem: (id: string) => void;
-	setCountItem: (id:string,value:number) => void;
+	deleteItem: (id: number) => void;
+	setCountItem: (id:number,value:number) => void;
 };
 
 export const BasketItem: FC<BasketItemProps> = ({
 	id,
 	discount,
-	imageSrc,
+	img,
 	price,
-	productDiscription,
+	name,
 	inBasketCount,
 	deleteItem,
 	setCountItem,
@@ -44,6 +44,7 @@ export const BasketItem: FC<BasketItemProps> = ({
 		setInputValue(prevValue => (prevValue === 1 ? 1 : prevValue - 1));
 	};
 
+
 	useEffect(() => {
 		setCountItem(id,inputValue);
 	}, [id, inputValue]);
@@ -52,17 +53,13 @@ export const BasketItem: FC<BasketItemProps> = ({
 		<div className={styles.container}>
 			<div className={styles.top_panel}>
 				<figure className={styles.picture}>
-					<img src={imageSrc} alt="phone" />
+					<img src={img} alt="phone" />
 				</figure>
 				<div className={styles.discription}>
-					<p>{productDiscription}</p>
+					<p>{name}</p>
 					<PriceAria price={priceWhithCount} discount={discount} />
 				</div>
 				<div>
-					{/* <input
-						type="checkbox"
-						onChange={() => checkboxHandler(id)}
-					/> */}
 				</div>
 			</div>
 			<div className={styles.bottom_panel}>

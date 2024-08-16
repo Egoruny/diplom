@@ -6,6 +6,8 @@ import { ProductPage } from "../pages/product-page/product-page";
 import { BasketPage } from "@pages/basket-page/basket-page";
 import { OrderingPage } from "@pages/ordering-page/ordering-page";
 import { CatalogPage } from "@pages/catalog-page/catalog-page";
+import { AuthPage } from "@pages/auth-page/auth-page";
+import { NotFoundPage } from "@pages/not-found-page/not-found-page";
 
 
 
@@ -68,6 +70,23 @@ export const router = createBrowserRouter([
 						);
 					},
 				},
+			},
+			{
+				path: PATH.Auth,
+				element: <AuthPage />,
+				handle: {
+					crumb: () => {
+						return (
+							<Link to={PATH.Auth}>
+							Авторизация
+							</Link>
+						);
+					},
+				},
+			},
+			{
+				path: '*',
+				element: <NotFoundPage />,
 			},
 		],
 	},

@@ -1,0 +1,12 @@
+
+
+.main_container {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction:column;
+    gap:40px;
+}
+
+

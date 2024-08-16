@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styles from "./bage.module.css";
 import { useAppSelector } from "@hooks/typed-redux-hooks";
-import { getBasketItemsSelect } from "@redux/slices/product-slice/product-slice-selectors";
+import { getCartItems } from "@redux/slices/cart-slice/cart-selectors";
 
 
 type BageProps = {
@@ -16,17 +16,16 @@ basket= "basket"
 }
 
 const maxGoodsCount = 9;
-// сделать енам
-// опт
+
 export const Bage: FC<BageProps> = ({ discount, type = bageType.card }) => {
-	const quantityGoodsInBasket = useAppSelector(getBasketItemsSelect);
+	const quantityGoodsInBasket = useAppSelector(getCartItems);
 
 	if (type === bageType.card) {
 		return <div className={styles.bage_container_card}>{discount}%</div>;
-	} else if (type === bageType.basket && quantityGoodsInBasket.length) {
+	} else if (type === bageType.basket && quantityGoodsInBasket?.length) {
 		const quantityGoodsMaxCount =
-			quantityGoodsInBasket.length <= maxGoodsCount
-				? quantityGoodsInBasket.length
+			quantityGoodsInBasket?.length <= maxGoodsCount
+				? quantityGoodsInBasket?.length
 				: `${maxGoodsCount}+`;
 
 		return (

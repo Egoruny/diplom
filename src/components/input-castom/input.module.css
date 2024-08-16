@@ -1,6 +1,14 @@
 @import url("../../variables.css");
 
+.options_stl {
+	position: absolute;
+	width: 100%;
+	z-index: 2;
+	background-color: var(--gray-color);;
+}
+
 .input_field {
+	position: relative;
 	max-width: 800px;
 	width: 100%;
 	position: relative;
@@ -12,7 +20,6 @@
 	border-radius: 10px;
 	background: var(--gray-color);
 	padding: var(--gap-2s);
-	color: var(--white-color);
 }
 
 .input_header:focus {

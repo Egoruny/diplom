@@ -6,6 +6,7 @@
 	max-width: 216px;
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	gap: var(--gap-m);
 }
 
@@ -25,9 +26,7 @@
 	justify-content: center;
 }
 
-.add_btn {
-	z-index: 10;
-}
+
 
 
 @media (max-width:840px) {

@@ -1,9 +1,9 @@
 import { FC } from "react";
-import { InfoType } from "@types/product-type";
+import { InfoType } from "@types/selected-product-type";
 import styles from "./product-characteristics.module.css";
 
 type ProductCharacteristicsProps = {
-	characteristicsItems: InfoType[];
+	characteristicsItems: InfoType;
 };
 
 const title = "Характеристики:";

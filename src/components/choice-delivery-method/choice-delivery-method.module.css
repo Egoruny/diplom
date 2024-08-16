@@ -2,9 +2,18 @@
 
 .wrapp {
     width: 100%;
-    height: 200px;
+    padding-bottom: var(--gap-2s);
     border: var( --border-heigth-2xs) solid var(--purpure-color);
     border-radius: var(--border-radius-m);
+    text-align: center;
+}
+
+.wrappOrder {
+    width: 100%;
+}
+
+.wrapp h3 {
+    margin-top: 20px;
 }
 
 .choise_btn {
