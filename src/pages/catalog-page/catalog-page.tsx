@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import { PageHeader } from "@components/page-header/page-header";
 import { ProductCard } from "@components/product-card/product-card";
-import { FilterPanel } from "@components/filter-panel/filter-panel";
+
 
 import { useAppSelector, useAppDispatch } from "@hooks/typed-redux-hooks";
 import { productsSelect } from "@redux/slices/product-slice/product-slice-selectors";
